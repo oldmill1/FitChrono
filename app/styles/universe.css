@@ -1,0 +1,13 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  height: 100vh;
+}
+
+.grid-item {
+  background-color: #ccc;
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+}
