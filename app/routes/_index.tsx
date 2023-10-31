@@ -25,7 +25,7 @@ export default function Index() {
         <NavLink
           key={muscleGroup.id}
           className='grid-item'
-          to={`/muscleGroups/${muscleGroup.id}`}
+          to={`/muscleGroups/${muscleGroup.name}`}
         >
           <div>{muscleGroup.name}</div>
         </NavLink>
