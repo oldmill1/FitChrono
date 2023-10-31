@@ -1,5 +1,8 @@
 import type { MetaFunction } from '@remix-run/node';
-import { NavLink } from '@remix-run/react';
+import { json } from '@remix-run/node'; // or cloudflare/deno
+import { NavLink, useLoaderData } from '@remix-run/react';
+
+import { db } from '~/db.server';
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,17 +11,25 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader = async () => {
+  // return all the MuscleGroup records
+  const muscleGroups = await db.muscleGroup.findMany();
+  return json({ muscleGroups });
+};
+
 export default function Index() {
+  const { muscleGroups } = useLoaderData<typeof loader>();
   return (
     <div className='grid-container'>
-      <NavLink className='grid-item' to={`/muscleGroups/chest`}>
-        <div >Chest</div>
-      </NavLink>
-      <div className='grid-item'>Legs</div>
-      <div className='grid-item'>Back</div>
-      <div className='grid-item'>Arms</div>
-      <div className='grid-item'>Core</div>
-      <div className='grid-item'>Shoulders</div>
+      {muscleGroups.map((muscleGroup) => (
+        <NavLink
+          key={muscleGroup.id}
+          className='grid-item'
+          to={`/muscleGroups/${muscleGroup.id}`}
+        >
+          <div>{muscleGroup.name}</div>
+        </NavLink>
+      ))}
     </div>
   );
 }
