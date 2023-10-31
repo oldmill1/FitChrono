@@ -1,3 +1,7 @@
+body {
+  background: #191E25;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -5,11 +9,11 @@
   height: 100vh;
 
   .grid-item {
-    background-color: #ccc;
+    border: 1px solid #ccc;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 0;
     font-size: 24px;
   }
 }
