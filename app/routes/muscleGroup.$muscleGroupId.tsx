@@ -7,7 +7,6 @@ import Menubar from '~/components/Menubar';
 import { db } from '~/db.server';
 
 async function getLoaderData(name: string) {
-  console.log({ name });
   const muscleGroup = await db.muscleGroup.findFirst({
     where: {
       name: name,

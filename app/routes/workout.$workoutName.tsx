@@ -10,7 +10,13 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   if (!workout) {
     throw new Response('Not Found', { status: 404 });
   }
-  return json(workout);
+  const muscleGroup = await db.muscleGroup.findUnique({
+    where: { id: workout.muscleGroupId },
+  });
+  if (!muscleGroup) {
+    throw new Response('Not Found', { status: 404 });
+  }
+  return json({ workout, muscleGroup });
 };
 
 /**
@@ -21,17 +27,23 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
  * @constructor
  */
 export default function Workout() {
-  const workout = useLoaderData<typeof loader>();
-
+  const { workout, muscleGroup } = useLoaderData<typeof loader>();
+  console.log({ workout });
   return (
     <div>
-      <Menubar title={workout.displayName} />
+      <Menubar
+        returnTo={`/muscleGroup/${muscleGroup.name}`}
+        title={workout.displayName}
+      />
       <div className='grid-container'>
         <div className='grid-item'>
           <span>Set</span>
         </div>
         <div className='grid-item'>
           <span>Reps</span>
+        </div>
+        <div className='grid-item'>
+          <span>Weight</span>
         </div>
       </div>
     </div>

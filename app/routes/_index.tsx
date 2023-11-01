@@ -6,8 +6,8 @@ import Menubar from '~/components/Menubar';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'New Remix App' },
-    { name: 'description', content: 'Welcome to Remix!' },
+    { title: 'You are awesome!' },
+    { name: 'description', content: 'The hype is real' },
   ];
 };
 
