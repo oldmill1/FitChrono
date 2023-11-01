@@ -1,7 +1,7 @@
 import invariant from 'tiny-invariant';
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { NavLink, useLoaderData } from '@remix-run/react';
 
 import { db } from '~/db.server';
 
@@ -14,6 +14,14 @@ async function getLoaderData(name: string) {
     select: {
       id: true,
       name: true,
+      display: true,
+      workouts: {
+        select: {
+          id: true,
+          name: true,
+          displayName: true,
+        },
+      },
     },
   });
   if (!muscleGroup) {
@@ -29,9 +37,22 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export default function MuscleGroup() {
   const muscleGroup = useLoaderData<typeof loader>();
+  const { workouts } = muscleGroup;
+  console.log({ workouts });
   return (
     <div>
       <h1>{muscleGroup.name}</h1>
+      <div className='grid-container'>
+        {workouts.map((workout) => (
+          <NavLink
+            key={workout.id}
+            className='grid-item'
+            to={`/workout/${workout.name}`}
+          >
+            {workout.displayName}
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 }

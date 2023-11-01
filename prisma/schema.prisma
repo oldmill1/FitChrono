@@ -20,11 +20,13 @@ model MuscleGroup {
   id       Int       @id @default(autoincrement())
   name     String
   workouts Workout[]
+  display  String?
 }
 
 model Workout {
   id           Int         @id @default(autoincrement())
   name         String
+  displayName  String
   muscleGroupId Int
   muscleGroup  MuscleGroup @relation(fields: [muscleGroupId], references: [id])
 }
