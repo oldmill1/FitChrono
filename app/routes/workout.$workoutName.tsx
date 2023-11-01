@@ -1,6 +1,7 @@
 import { json, LoaderFunctionArgs } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { db } from '~/db.server';
+import Menubar from '~/components/Menubar';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const workout = await db.workout.findFirst({
@@ -24,7 +25,7 @@ export default function Workout() {
 
   return (
     <div>
-      <h1>{workout.displayName}</h1>
+      <Menubar title={workout.displayName} />
       <div className='grid-container'>
         <div className='grid-item'>
           <span>Set</span>

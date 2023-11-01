@@ -17,4 +17,27 @@ body {
   font-size: 24px;
 }
 
+.menubar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  color: white;
+}
+.menubar h1 {
+  font-size: 2.4em;
+  color: #6fc1b8;
+}
+.menubar nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.menubar nav ul li {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
 /*# sourceMappingURL=universe.css.map */

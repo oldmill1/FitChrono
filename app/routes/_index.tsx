@@ -1,8 +1,8 @@
 import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node'; // or cloudflare/deno
 import { NavLink, useLoaderData } from '@remix-run/react';
-
 import { db } from '~/db.server';
+import Menubar from '~/components/Menubar';
 
 export const meta: MetaFunction = () => {
   return [
@@ -20,16 +20,31 @@ export const loader = async () => {
 export default function Index() {
   const { muscleGroups } = useLoaderData<typeof loader>();
   return (
-    <div className='grid-container'>
-      {muscleGroups.map((muscleGroup) => (
-        <NavLink
-          key={muscleGroup.id}
-          className='grid-item'
-          to={`/muscleGroup/${muscleGroup.name}`}
-        >
-          <div>{muscleGroup.name}</div>
-        </NavLink>
-      ))}
+    <div>
+      <Menubar
+        title='FitCrono 0.1'
+        listItems={[
+          {
+            name: 'Hearts',
+            httpEntity: <span>&#10084;</span>,
+          },
+          {
+            name: 'Total Weight',
+            httpEntity: <span>&#128170;</span>,
+          },
+        ]}
+      />
+      <div className='grid-container'>
+        {muscleGroups.map((muscleGroup) => (
+          <NavLink
+            key={muscleGroup.id}
+            className='grid-item'
+            to={`/muscleGroup/${muscleGroup.name}`}
+          >
+            <div>{muscleGroup.name}</div>
+          </NavLink>
+        ))}
+      </div>
     </div>
   );
 }
