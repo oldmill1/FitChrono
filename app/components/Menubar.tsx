@@ -14,8 +14,11 @@ export default function Menubar({
           <ul>
             {listItems.map((item, i) => (
               <li key={i}>
-                {item.httpEntity}
-                {item.name}
+                <button>
+                  <span>{item.httpEntity}</span>
+                  {item.name}
+                  &nbsp; 0
+                </button>
               </li>
             ))}
           </ul>

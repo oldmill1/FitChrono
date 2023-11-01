@@ -22,7 +22,7 @@ export default function Index() {
   return (
     <div>
       <Menubar
-        title='FitCrono 0.1'
+        title='FitChrono 0.1'
         listItems={[
           {
             name: 'Hearts',

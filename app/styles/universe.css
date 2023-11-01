@@ -39,5 +39,11 @@ body {
   display: flex;
   align-items: center;
 }
+.menubar nav ul li button {
+  background: none;
+  border: 1px solid #6fa8c0;
+  padding: 0.5rem;
+  color: white;
+}
 
 /*# sourceMappingURL=universe.css.map */
