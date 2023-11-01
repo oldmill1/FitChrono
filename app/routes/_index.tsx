@@ -25,12 +25,9 @@ export default function Index() {
         title='FitChrono 0.1'
         listItems={[
           {
-            name: 'Hearts',
-            httpEntity: <span>&#10084;</span>,
-          },
-          {
-            name: 'Total Weight',
+            name: 'Total Weight Logged',
             httpEntity: <span>&#128170;</span>,
+            itemValue: 0,
           },
         ]}
       />

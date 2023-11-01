@@ -6,7 +6,11 @@ export default function Menubar({
   returnTo = null,
 }: {
   title: string;
-  listItems?: { name: string; httpEntity: React.ReactNode }[];
+  listItems?: {
+    name: string;
+    httpEntity: React.ReactNode;
+    itemValue: string | number;
+  }[];
   returnTo?: string | null;
 }) {
   return (
@@ -23,7 +27,7 @@ export default function Menubar({
                 <button>
                   <span>{item.httpEntity}</span>
                   {item.name}
-                  &nbsp; 0
+                  &nbsp; {item.itemValue}
                 </button>
               </li>
             ))}
