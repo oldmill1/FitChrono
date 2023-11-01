@@ -2,6 +2,7 @@ import invariant from 'tiny-invariant';
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { NavLink, useLoaderData } from '@remix-run/react';
+import Menubar from '~/components/Menubar';
 
 import { db } from '~/db.server';
 
@@ -38,10 +39,9 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 export default function MuscleGroup() {
   const muscleGroup = useLoaderData<typeof loader>();
   const { workouts } = muscleGroup;
-  console.log({ workouts });
   return (
     <div>
-      <h1>{muscleGroup.name}</h1>
+      <Menubar title={muscleGroup.name} returnTo={'/'} />
       <div className='grid-container'>
         {workouts.map((workout) => (
           <NavLink

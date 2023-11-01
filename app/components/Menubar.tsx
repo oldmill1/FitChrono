@@ -1,14 +1,20 @@
 import React from 'react';
+import { NavLink } from '@remix-run/react';
 export default function Menubar({
   title,
   listItems = [],
+  returnTo = null,
 }: {
   title: string;
   listItems?: { name: string; httpEntity: React.ReactNode }[];
+  returnTo?: string | null;
 }) {
   return (
     <div className='menubar'>
-      <h1>{title}</h1>
+      <div className='menubar-title'>
+        {returnTo && <NavLink to={returnTo}>&#8592; Back</NavLink>}
+        <h1>{title}</h1>
+      </div>
       {listItems.length > 0 && (
         <nav>
           <ul>

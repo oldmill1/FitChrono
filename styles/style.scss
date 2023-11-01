@@ -23,8 +23,22 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1rem;
   color: white;
+
+  &-title {
+    display: flex;
+    align-items: center;
+
+    a {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+      font-size: 1.2rem;
+      color: white;
+      text-decoration: none;
+    }
+  }
 
   h1 {
     font-size: 2.4em;
@@ -46,8 +60,8 @@ body {
         button {
           background: none;
           border: 1px solid #6fa8c0;
-          padding: .5rem;
-          color:white;
+          padding: 0.5rem;
+          color: white;
         }
       }
     }

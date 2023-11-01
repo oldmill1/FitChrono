@@ -8,12 +8,12 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
-import universeStylesHref from '~/styles/universe.css';
+import stylesHref from '~/styles/style.css';
 import resetCSS from '~/styles/reset.css';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: resetCSS },
-  { rel: 'stylesheet', href: universeStylesHref },
+  { rel: 'stylesheet', href: stylesHref },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
 
