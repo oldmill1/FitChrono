@@ -1,38 +1,52 @@
-# Welcome to Remix!
+# FitChrono
 
-- [Remix Docs](https://remix.run/docs)
+FitChrono is a fitness tracking application designed to help users log and monitor their workouts, providing insights and analytics to optimize their fitness journey.
 
-## Development
+## Features
 
-From your terminal:
+- **User Authentication**: Secure sign-up and login functionality.
+- **Workout Logging**: Users can log their workouts, including exercises, sets, reps, and weights.
+- **Muscle Group Tracking**: Workouts are categorized by muscle groups, allowing users to focus on specific areas.
+- **Analytics**: Gain insights into your progress with visual analytics.
+- **Workout Defaults**: Set default values for specific workouts to speed up the logging process.
 
-```sh
-npm run dev
-```
+## Getting Started
 
-This starts your app in development mode, rebuilding assets on file changes.
+1. Clone the repository:
 
-## Deployment
+   ```bash
+   git clone https://github.com/yourusername/fitchrono.git
+   ```
 
-First, build your app for production:
+2. Navigate to the project directory:
 
-```sh
-npm run build
-```
+   ```bash
+   cd fitchrono
+   ```
 
-Then run the app in production mode:
+3. Install dependencies:
 
-```sh
-npm start
-```
+   ```bash
+   npm install
+   ```
 
-Now you'll need to pick a host to deploy it to.
+4. Start the development server:
+   ```bash
+   npm start
+   ```
 
-### DIY
+Visit `http://localhost:3000` in your browser to access the application.
 
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
+## Tech Stack
 
-Make sure to deploy the output of `remix build`
+- **Frontend**: Remix
+- **Backend**: Node.js with Express
+- **Database**: PostgreSQL with Prisma ORM
 
-- `build/`
-- `public/build/`
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
