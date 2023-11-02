@@ -34,6 +34,13 @@ export default function Workout() {
       <Menubar
         returnTo={`/muscleGroup/${muscleGroup.name}`}
         title={workout.displayName}
+        listItems={[
+          {
+            name: 'PR Weight',
+            httpEntity: <span>&#128170;</span>,
+            itemValue: 0,
+          },
+        ]}
       />
       <div className='grid-container'>
         <div className='grid-item'>
