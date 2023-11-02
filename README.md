@@ -4,11 +4,11 @@ FitChrono is a fitness tracking application designed to help users log and monit
 
 ## Features
 
-- **User Authentication**: Secure sign-up and login functionality.
-- **Workout Logging**: Users can log their workouts, including exercises, sets, reps, and weights.
-- **Muscle Group Tracking**: Workouts are categorized by muscle groups, allowing users to focus on specific areas.
-- **Analytics**: Gain insights into your progress with visual analytics.
-- **Workout Defaults**: Set default values for specific workouts to speed up the logging process.
+- 🔒 **User Authentication**: Secure sign-up and login functionality.
+- 🏋️ **Workout Logging**: Users can log their workouts, including exercises, sets, reps, and weights.
+- 💪 **Muscle Group Tracking**: Workouts are categorized by muscle groups, allowing users to focus on specific areas.
+- 📊 **Analytics**: Gain insights into your progress with the StrengthBar.
+- ⚙️ **Workout Defaults**: Set default values for specific workouts to speed up the logging process.
 
 ## Getting Started
 
