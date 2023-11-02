@@ -18,18 +18,18 @@ body {
   font-size: 24px;
 }
 
-.menubar {
+.strengthBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
   color: white;
 }
-.menubar-title {
+.strengthBar-title {
   display: flex;
   align-items: center;
 }
-.menubar-title a {
+.strengthBar-title a {
   display: flex;
   align-items: center;
   margin-right: 1rem;
@@ -37,22 +37,22 @@ body {
   color: white;
   text-decoration: none;
 }
-.menubar h1 {
+.strengthBar h1 {
   font-size: 2.4em;
   color: #6fc1b8;
 }
-.menubar nav ul {
+.strengthBar nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
 }
-.menubar nav ul li {
+.strengthBar nav ul li {
   margin-left: 20px;
   display: flex;
   align-items: center;
 }
-.menubar nav ul li button {
+.strengthBar nav ul li button {
   background: none;
   border: 1px solid #6fa8c0;
   padding: 0.5rem;

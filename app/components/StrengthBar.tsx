@@ -14,8 +14,8 @@ export default function StrengthBar({
   returnTo?: string | null;
 }) {
   return (
-    <div className='menubar'>
-      <div className='menubar-title'>
+    <div className='strengthBar'>
+      <div className='strengthBar-title'>
         {returnTo && <NavLink to={returnTo}>&#8592; Back</NavLink>}
         <h1>{title}</h1>
       </div>
