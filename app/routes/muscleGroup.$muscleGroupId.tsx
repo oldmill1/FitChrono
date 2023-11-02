@@ -2,7 +2,7 @@ import invariant from 'tiny-invariant';
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { NavLink, useLoaderData } from '@remix-run/react';
-import Menubar from '~/components/Menubar';
+import StrengthBar from '~/components/StrengthBar';
 
 import { db } from '~/db.server';
 
@@ -40,7 +40,7 @@ export default function MuscleGroup() {
   const { workouts } = muscleGroup;
   return (
     <div>
-      <Menubar title={muscleGroup.name} returnTo={'/'} />
+      <StrengthBar title={muscleGroup.name} returnTo={'/'} />
       <div className='grid-container'>
         {workouts.map((workout) => (
           <NavLink

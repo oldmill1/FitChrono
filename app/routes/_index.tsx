@@ -2,7 +2,7 @@ import type { MetaFunction } from '@remix-run/node';
 import { json } from '@remix-run/node'; // or cloudflare/deno
 import { NavLink, useLoaderData } from '@remix-run/react';
 import { db } from '~/db.server';
-import Menubar from '~/components/Menubar';
+import StrengthBar from '~/components/StrengthBar';
 
 export const meta: MetaFunction = () => {
   return [
@@ -21,7 +21,7 @@ export default function Index() {
   const { muscleGroups } = useLoaderData<typeof loader>();
   return (
     <div>
-      <Menubar
+      <StrengthBar
         title='FitChrono 0.1'
         listItems={[
           {

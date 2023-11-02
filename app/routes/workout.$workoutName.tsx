@@ -1,7 +1,7 @@
 import { json, LoaderFunctionArgs } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { db } from '~/db.server';
-import Menubar from '~/components/Menubar';
+import StrengthBar from '~/components/StrengthBar';
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const workout = await db.workout.findFirst({
@@ -31,7 +31,7 @@ export default function Workout() {
   console.log({ workout });
   return (
     <div>
-      <Menubar
+      <StrengthBar
         returnTo={`/muscleGroup/${muscleGroup.name}`}
         title={workout.displayName}
         listItems={[

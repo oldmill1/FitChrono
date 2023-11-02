@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from '@remix-run/react';
-export default function Menubar({
+export default function StrengthBar({
   title,
   listItems = [],
   returnTo = null,
