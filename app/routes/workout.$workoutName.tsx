@@ -3,7 +3,7 @@ import { json } from '@remix-run/node';
 import { useActionData, useLoaderData } from '@remix-run/react';
 import { db } from '~/db.server';
 import StrengthBar from '~/components/StrengthBar';
-import WeightTile from '~/components/WeightTile';
+import UpdateDefaults from '~/components/UpdateDefaults';
 import invariant from 'tiny-invariant';
 
 type ActionData = {
@@ -123,7 +123,7 @@ export default function Workout() {
           <span>Reps</span>
         </div>
         <div className='grid-item'>
-          <WeightTile workoutId={workout.id} weight={defaultWeight} />
+          <UpdateDefaults workoutId={workout.id} weight={defaultWeight} />
         </div>
       </div>
     </div>

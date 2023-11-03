@@ -1,5 +1,4 @@
 .simple-form {
-  font-family: 'Press Start 2P', cursive; // Replace with your pixel font
   background: #f0f0f0;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -14,32 +13,32 @@
 
     .heading {
       text-align: center;
-      margin-bottom: 1rem; // Adjust as needed
 
       p {
-        font-size: 1rem; // Adjust as needed
+        font-size: 1.7rem; // Adjust as needed
         color: #333; // Dark color for contrast
         font-weight: bold;
         letter-spacing: 0.05em;
         margin: 0;
         padding: 0;
+        font-family: 'VT323', monospace; // Replace with your monospace font
       }
     }
 
     .display {
-      background: #e0e0e0;
+      background: slategray;
       padding: 10px;
       border-radius: 5px;
-      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-      font-size: 2em;
+      font-size: 2.7em;
       text-align: right;
       letter-spacing: 1px;
       min-height: 60px;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      color: #333;
-      margin-top: 1rem;
+      color: ghostwhite;
+      margin-top: .3rem;
+      font-family: 'VT323', monospace; // Replace with your monospace font
     }
   }
 

@@ -17,7 +17,7 @@ import React from 'react';
 //   );
 // }
 
-export default function WeightTile({
+export default function UpdateDefaults({
   weight = 0,
   workoutId,
 }: {
@@ -25,6 +25,12 @@ export default function WeightTile({
   workoutId: number;
 }) {
   const [usrInput, setUsrInput] = React.useState('0');
+
+  React.useEffect(() => {
+    // If weight is a number, set usrInput to the string representation of weight
+    setUsrInput(Math.floor(weight).toString());
+  }, [weight]); // This effect runs on component mount and whenever weight changes
+
   function handlePress(action: string) {
     const numberAction = Number(action);
     if (!isNaN(numberAction)) {
