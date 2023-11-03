@@ -70,6 +70,10 @@ body {
 }
 .simple-form .top-container .heading {
   text-align: center;
+  margin-top: 1rem;
+}
+.simple-form .top-container .heading:first-of-type {
+  margin-top: 0;
 }
 .simple-form .top-container .heading p {
   font-size: 1.7rem;
@@ -94,6 +98,9 @@ body {
   color: ghostwhite;
   margin-top: 0.3rem;
   font-family: "VT323", monospace;
+}
+.simple-form .top-container .display:first-of-type {
+  margin-bottom: 1rem;
 }
 .simple-form .control-buttons {
   display: flex;
@@ -150,6 +157,30 @@ body {
 }
 .simple-form .bottom-container .buttons .row button:active {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+.simple-form .complete-set-button {
+  background: slategray;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+  margin: 20px auto;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  width: 100%;
+}
+.simple-form .complete-set-button:hover {
+  background-color: darkslategray;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.75);
+}
+.simple-form .complete-set-button:active {
+  background-color: darkslategray;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .grid-container {

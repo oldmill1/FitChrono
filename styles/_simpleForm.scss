@@ -13,15 +13,20 @@
 
     .heading {
       text-align: center;
+      margin-top: 1rem;
+
+      &:first-of-type {
+        margin-top: 0; // Removes margin-top from the first heading
+      }
 
       p {
-        font-size: 1.7rem; // Adjust as needed
-        color: #333; // Dark color for contrast
+        font-size: 1.7rem;
+        color: #333;
         font-weight: bold;
         letter-spacing: 0.05em;
         margin: 0;
         padding: 0;
-        font-family: 'VT323', monospace; // Replace with your monospace font
+        font-family: 'VT323', monospace;
       }
     }
 
@@ -37,8 +42,12 @@
       align-items: center;
       justify-content: flex-end;
       color: ghostwhite;
-      margin-top: .3rem;
+      margin-top: 0.3rem;
       font-family: 'VT323', monospace; // Replace with your monospace font
+
+      &:first-of-type {
+        margin-bottom: 1rem; // Adds space between the two displays
+      }
     }
   }
 
@@ -107,6 +116,41 @@
           }
         }
       }
+    }
+  }
+
+  .complete-set-button {
+    background: slategray;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    box-shadow:
+      0 4px 16px rgba(0, 0, 0, 0.2),
+      inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    margin: 20px auto;
+    display: block; // Center the button
+    cursor: pointer;
+    transition:
+      background-color 0.3s,
+      box-shadow 0.3s;
+    width: 100%;
+
+    &:hover {
+      background-color: darkslategray; // Darker blue on hover
+      box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.25),
+        inset 0 1px 2px rgba(255, 255, 255, 0.75);
+    }
+
+    &:active {
+      background-color: darkslategray; // Even darker on active
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5);
     }
   }
 }

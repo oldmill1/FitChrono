@@ -47,7 +47,13 @@ export default function UpdateDefaults({
     <div className='simple-form'>
       <div className='top-container'>
         <div className='heading'>
-          <p>Weight (lb)</p>
+          <p>Reps</p>
+        </div>
+        <div className='display'>0</div>
+        <div className='heading'>
+          <p>
+            Weight <span>(lb)</span>
+          </p>
         </div>
         <div className='display'>{usrInput}</div>
       </div>
@@ -74,6 +80,7 @@ export default function UpdateDefaults({
             <button onClick={() => handlePress('3')}>3</button>
           </div>
         </div>
+        <button className='complete-set-button'>Record Set</button>
       </div>
     </div>
   );
