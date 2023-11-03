@@ -1,3 +1,4 @@
+import React from 'react';
 // import { Form } from '@remix-run/react';
 
 // function DataForm({
@@ -23,30 +24,46 @@ export default function WeightTile({
   weight?: number;
   workoutId: number;
 }) {
+  const [usrInput, setUsrInput] = React.useState('0');
+  function handlePress(buttonId: string) {
+    // This function edits the usrInput state:
+    // 1. If the usrInput is 0, replace it with the buttonId
+    // 2. If the usrInput is not 0, append the buttonId to the end of the usrInput string
+    if (usrInput === '0') {
+      setUsrInput(buttonId);
+    } else {
+      setUsrInput(usrInput + buttonId);
+    }
+  }
   return (
     <div className='simple-form'>
       <div className='top-container'>
         <div className='heading'>
           <p>Lift Weight</p>
         </div>
-        <div className='display'>0</div>
+        <div className='display'>{usrInput}</div>
+      </div>
+      <div className='control-buttons'>
+        <button onClick={() => handlePress('clear')}>Clear</button>
+        <button onClick={() => handlePress('convert')}>Convert</button>
+        <button onClick={() => handlePress('copy')}>Copy</button>
       </div>
       <div className='bottom-container'>
         <div className='buttons'>
           <div className='row'>
-            <span>7</span>
-            <span>8</span>
-            <span>9</span>
+            <button onClick={() => handlePress('7')}>7</button>
+            <button onClick={() => handlePress('8')}>8</button>
+            <button onClick={() => handlePress('9')}>9</button>
           </div>
           <div className='row'>
-            <span>4</span>
-            <span>5</span>
-            <span>6</span>
+            <button onClick={() => handlePress('4')}>4</button>
+            <button onClick={() => handlePress('5')}>5</button>
+            <button onClick={() => handlePress('6')}>6</button>
           </div>
           <div className='row'>
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
+            <button onClick={() => handlePress('1')}>1</button>
+            <button onClick={() => handlePress('2')}>2</button>
+            <button onClick={() => handlePress('3')}>3</button>
           </div>
         </div>
       </div>
