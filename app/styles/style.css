@@ -68,7 +68,6 @@ body {
   padding: 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  box-shadow: inset 0 -4px 5px -5px rgba(0, 0, 0, 0.2);
 }
 .simple-form .top-container .heading {
   text-align: center;
@@ -100,19 +99,20 @@ body {
 .simple-form .control-buttons {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  background: white;
 }
 .simple-form .control-buttons button {
   background: #fc385d;
-  border-radius: 0px;
+  border-radius: 1rem;
   border: none;
-  padding: 0.25rem 0.5rem;
+  padding: 0.125rem 0.25rem;
   font-size: 1.3rem;
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-family: "Source Code Pro", monospace;
-  font-weight: bold;
+  font-weight: 600;
 }
 .simple-form .control-buttons button:hover {
   background-color: #e0e0e0;
@@ -141,6 +141,8 @@ body {
   cursor: pointer;
   user-select: none;
   color: #98b9f9;
+  font-family: "Source Code Pro", monospace;
+  font-size: 1.9rem;
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 .simple-form .bottom-container .buttons .row button:hover {

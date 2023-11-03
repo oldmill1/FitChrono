@@ -25,21 +25,23 @@ export default function WeightTile({
   workoutId: number;
 }) {
   const [usrInput, setUsrInput] = React.useState('0');
-  function handlePress(buttonId: string) {
-    // This function edits the usrInput state:
-    // 1. If the usrInput is 0, replace it with the buttonId
-    // 2. If the usrInput is not 0, append the buttonId to the end of the usrInput string
-    if (usrInput === '0') {
-      setUsrInput(buttonId);
+  function handlePress(action: string) {
+    const numberAction = Number(action);
+    if (!isNaN(numberAction)) {
+      setUsrInput(usrInput === '0' ? action : usrInput + action);
     } else {
-      setUsrInput(usrInput + buttonId);
+      switch (action) {
+        case 'clear':
+          setUsrInput('0');
+          break;
+      }
     }
   }
   return (
     <div className='simple-form'>
       <div className='top-container'>
         <div className='heading'>
-          <p>Lift Weight</p>
+          <p>Weight (lb)</p>
         </div>
         <div className='display'>{usrInput}</div>
       </div>
