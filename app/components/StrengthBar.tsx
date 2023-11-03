@@ -1,9 +1,12 @@
 import React from 'react';
 import { NavLink } from '@remix-run/react';
+import classNames from 'classnames';
+
 export default function StrengthBar({
   title,
   listItems = [],
-  returnTo = null,
+  returnTo = undefined,
+  message = undefined,
 }: {
   title: string;
   listItems?: {
@@ -12,12 +15,17 @@ export default function StrengthBar({
     itemValue: string | number;
   }[];
   returnTo?: string | null;
+  message?: string | undefined;
 }) {
+  const messageClass = classNames('strengthBar-message', {
+    'strengthBar-message-loaded': message !== undefined,
+  });
   return (
     <div className='strengthBar'>
       <div className='strengthBar-title'>
         {returnTo && <NavLink to={returnTo}>&#8592; Back</NavLink>}
         <h1>{title}</h1>
+        <div className={messageClass}>{message && <span>{message}</span>}</div>
       </div>
       {listItems.length > 0 && (
         <nav>

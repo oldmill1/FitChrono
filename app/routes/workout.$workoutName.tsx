@@ -1,10 +1,15 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Form, useLoaderData } from '@remix-run/react';
+import { Form, useLoaderData, useActionData } from '@remix-run/react';
 import { db } from '~/db.server';
 import StrengthBar from '~/components/StrengthBar';
 import WeightTile from '~/components/WeightTile';
 import invariant from 'tiny-invariant';
+
+type ActionData = {
+  success?: string;
+  error?: string;
+};
 
 export const action = async ({ params, request }: LoaderFunctionArgs) => {
   const formData = await request.formData();
@@ -93,12 +98,15 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 export default function Workout() {
   const { workout, muscleGroup, defaultReps, defaultWeight } =
     useLoaderData<typeof loader>();
+  const actionData = useActionData<ActionData>();
+  console.log({ actionData });
   // console.log({ workout });
   return (
     <div>
       <StrengthBar
         returnTo={`/muscleGroup/${muscleGroup.name}`}
         title={workout.displayName}
+        message={actionData?.success || actionData?.error}
         listItems={[
           {
             name: 'PR Weight',

@@ -9,6 +9,18 @@ body {
   padding: 1rem;
   color: white;
 }
+.strengthBar-message {
+  padding-left: 0.8rem;
+  font-size: 1.2rem;
+  font-style: italic;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 0; /* Start invisible */
+  visibility: hidden; /* Start without taking space */
+}
+.strengthBar-message-loaded {
+  opacity: 1;
+  visibility: visible;
+}
 .strengthBar-title {
   display: flex;
   align-items: center;

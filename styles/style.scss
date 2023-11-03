@@ -2,55 +2,7 @@ body {
   background: #191e25;
 }
 
-// Menu Bar
-.strengthBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  color: white;
-
-  &-title {
-    display: flex;
-    align-items: center;
-
-    a {
-      display: flex;
-      align-items: center;
-      margin-right: 1rem;
-      font-size: 1.2rem;
-      color: white;
-      text-decoration: none;
-    }
-  }
-
-  h1 {
-    font-size: 2.4em;
-    color: #6fc1b8;
-  }
-
-  nav {
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-
-      li {
-        margin-left: 20px;
-        display: flex;
-        align-items: center;
-
-        button {
-          background: none;
-          border: 1px solid #6fa8c0;
-          padding: 0.5rem;
-          color: white;
-        }
-      }
-    }
-  }
-}
+@import 'strengthBar';
 
 .grid-container {
   display: grid;
