@@ -4,12 +4,49 @@ import { Form, useLoaderData } from '@remix-run/react';
 import { db } from '~/db.server';
 import StrengthBar from '~/components/StrengthBar';
 import WeightTile from '~/components/WeightTile';
+import invariant from 'tiny-invariant';
 
 export const action = async ({ params, request }: LoaderFunctionArgs) => {
   const formData = await request.formData();
-  const updates = Object.fromEntries(formData);
-  console.log({ updates });
-  return null;
+  const weight = formData.get('weight');
+  const workoutId = formData.get('workoutId');
+
+  invariant(params.workoutName, 'Missing workoutName param');
+  invariant(workoutId, 'Missing workoutId param');
+  invariant(weight, 'Missing weight param');
+
+  // Convert weight to a number and validate it
+  if (typeof weight === 'string') {
+    const weightNumber = parseFloat(weight);
+    if (isNaN(weightNumber)) {
+      // Handle error: weight is not a valid number
+      return { error: 'Invalid weight format.' };
+    }
+    const userId = 1; // Replace with actual user ID from session or authentication context
+
+    try {
+      await db.workoutDefaults.upsert({
+        where: { workoutId_userId: { workoutId: Number(workoutId), userId } },
+        update: { weight: weightNumber },
+        create: {
+          workoutId: Number(workoutId),
+          userId,
+          weight: weightNumber,
+          reps: 0, // Default reps value or fetch from form if needed
+        },
+      });
+      // If the upsert is successful, return a success message
+      return { success: 'Updated!' };
+    } catch (error) {
+      // If there's an error, return an error message
+      // Log the error or handle it as needed
+      console.error(error);
+      return { error: 'An error occurred while updating.' };
+    }
+  } else {
+    // Handle the case where weight is not a string
+    return { error: 'Weight must be a string.' };
+  }
 };
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -80,6 +117,7 @@ export default function Workout() {
         <div className='grid-item'>
           <Form id='default-weight-form' method='post'>
             <WeightTile weight={defaultWeight} />
+            <input type='hidden' name='workoutId' value={workout.id} />
             <input name='weight' type='number' defaultValue={defaultWeight} />
             <button type='submit'>Update</button>
           </Form>

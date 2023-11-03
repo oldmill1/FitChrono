@@ -52,4 +52,6 @@ model WorkoutDefaults {
   reps      Int
   workout   Workout @relation(fields: [workoutId], references: [id])
   user      User    @relation(fields: [userId], references: [id])
+
+  @@unique([userId, workoutId], name: "workoutId_userId")
 }
