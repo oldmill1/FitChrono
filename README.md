@@ -1,3 +1,5 @@
+![FitChrono Numpad](./assets/fitchrono_numpad.png)
+
 # FitChrono
 
 FitChrono is a fitness tracking application designed to help users log and monitor their workouts, providing insights and analytics to optimize their fitness journey.
