@@ -3,6 +3,7 @@ body {
 }
 
 @import 'strengthBar';
+@import 'simpleForm';
 
 .grid-container {
   display: grid;
@@ -13,19 +14,8 @@ body {
 
   .grid-item {
     border: 1px solid #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 0;
     font-size: 24px;
     color: white;
   }
-}
-
-// Tile
-.tile {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }

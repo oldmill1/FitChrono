@@ -1,0 +1,87 @@
+.simple-form {
+  font-family: 'Press Start 2P', cursive; // Replace with your pixel font
+  background: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  margin: 20px auto;
+
+  .top-container {
+    background: #ffffff;
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: inset 0 -4px 5px -5px rgba(0, 0, 0, 0.2);
+
+    .heading {
+      text-align: center;
+      margin-bottom: 1rem; // Adjust as needed
+
+      p {
+        font-size: 1rem; // Adjust as needed
+        color: #333; // Dark color for contrast
+        font-weight: bold;
+        letter-spacing: 0.05em;
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    .display {
+      background: #e0e0e0;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+      font-size: 2em;
+      text-align: right;
+      letter-spacing: 1px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      color: #333;
+      margin-top: 1rem;
+    }
+  }
+
+  .bottom-container {
+    background: #d0d0d0;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    .buttons {
+      .row {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+
+        span {
+          background: #fafafa;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 60px;
+          height: 60px;
+          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+          cursor: pointer;
+          user-select: none;
+          color: #98b9f9;
+          transition:
+            background-color 0.3s,
+            box-shadow 0.3s;
+
+          &:hover {
+            background-color: #f2f2f2;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+          }
+
+          &:active {
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          }
+        }
+      }
+    }
+  }
+}

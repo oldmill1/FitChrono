@@ -14,6 +14,11 @@ import resetCSS from '~/styles/reset.css';
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: resetCSS },
   { rel: 'stylesheet', href: stylesHref },
+  // Google font:
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap',
+  },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
 
