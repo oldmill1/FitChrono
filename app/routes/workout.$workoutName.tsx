@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
-import { Form, useLoaderData, useActionData } from '@remix-run/react';
+import { useActionData, useLoaderData } from '@remix-run/react';
 import { db } from '~/db.server';
 import StrengthBar from '~/components/StrengthBar';
 import WeightTile from '~/components/WeightTile';
@@ -123,12 +123,7 @@ export default function Workout() {
           <span>Reps</span>
         </div>
         <div className='grid-item'>
-          <Form id='default-weight-form' method='post'>
-            <WeightTile weight={defaultWeight} />
-            <input type='hidden' name='workoutId' value={workout.id} />
-            <input name='weight' type='number' defaultValue={defaultWeight} />
-            <button type='submit'>Update</button>
-          </Form>
+          <WeightTile workoutId={workout.id} weight={defaultWeight} />
         </div>
       </div>
     </div>
