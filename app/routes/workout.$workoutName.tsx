@@ -14,30 +14,32 @@ type ActionData = {
 export const action = async ({ params, request }: LoaderFunctionArgs) => {
   const formData = await request.formData();
   const weight = formData.get('weight');
+  const reps = formData.get('reps');
   const workoutId = formData.get('workoutId');
 
   invariant(params.workoutName, 'Missing workoutName param');
   invariant(workoutId, 'Missing workoutId param');
   invariant(weight, 'Missing weight param');
+  invariant(reps, 'Missing reps param');
 
   // Convert weight to a number and validate it
-  if (typeof weight === 'string') {
+  if (typeof weight === 'string' && typeof reps === 'string') {
     const weightNumber = parseFloat(weight);
-    if (isNaN(weightNumber)) {
+    const repsNumber = parseFloat(reps);
+    if (isNaN(weightNumber) || isNaN(repsNumber)) {
       // Handle error: weight is not a valid number
       return { error: 'Invalid weight format.' };
     }
     const userId = 1; // Replace with actual user ID from session or authentication context
-
     try {
       await db.workoutDefaults.upsert({
         where: { workoutId_userId: { workoutId: Number(workoutId), userId } },
-        update: { weight: weightNumber },
+        update: { weight: weightNumber, reps: repsNumber },
         create: {
           workoutId: Number(workoutId),
           userId,
           weight: weightNumber,
-          reps: 0, // Default reps value or fetch from form if needed
+          reps: repsNumber,
         },
       });
       // If the upsert is successful, return a success message
@@ -114,7 +116,11 @@ export default function Workout() {
         ]}
       />
       <div className='workout-tracker'>
-        <UpdateDefaults workoutId={workout.id} weight={defaultWeight} />
+        <UpdateDefaults
+          workoutId={workout.id}
+          weight={defaultWeight}
+          reps={defaultReps}
+        />
       </div>
     </div>
   );

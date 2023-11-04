@@ -3,24 +3,8 @@ import classNames from 'classnames';
 import clickSound from '~/sounds/click.mp3';
 import clickSound2 from '~/sounds/click2.mp3';
 import clickSound3 from '~/sounds/click3.mp3';
-import { Form } from '@remix-run/react';
-import { useSubmit } from '@remix-run/react';
 
-function InvisibleDataForm({
-  weight,
-  workoutId,
-}: {
-  weight: number;
-  workoutId: number;
-}) {
-  return (
-    <Form id='default-weight-form' method='post'>
-      <input name='weight' type='number' defaultValue={weight} />
-      <input type='hidden' name='workoutId' value={workoutId} />
-      <button type='submit'>Update</button>
-    </Form>
-  );
-}
+import { useSubmit } from '@remix-run/react';
 
 export default function UpdateDefaults({
   weight = 0,
@@ -42,8 +26,6 @@ export default function UpdateDefaults({
     reps: 'overwrite',
     weight: 'overwrite',
   });
-  const [formWeight, setFormWeight] = useState(weight);
-  const [formReps, setFormReps] = useState(reps);
   const submit = useSubmit();
 
   const playClickSound = async (soundId: string) => {
@@ -168,10 +150,11 @@ export default function UpdateDefaults({
       console.error('Error playing sound', error);
     }
     const weightNumber = Number(weightInput);
-    if (!isNaN(weightNumber)) {
-      setFormWeight(weightNumber);
+    const repsNumber = Number(repsInput);
+    if (!isNaN(weightNumber) && !isNaN(repsNumber)) {
       const formData = new FormData();
       formData.append('weight', weightNumber.toString());
+      formData.append('reps', repsNumber.toString());
       formData.append('workoutId', workoutId.toString());
       submit(formData, { method: 'post' });
     }
@@ -263,7 +246,6 @@ export default function UpdateDefaults({
           </button>
         </div>
       </div>
-      <InvisibleDataForm weight={formWeight} workoutId={workoutId} />
     </div>
   );
 }

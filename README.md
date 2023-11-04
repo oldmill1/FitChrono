@@ -1,3 +1,5 @@
+> :construction: **NOTE:** This project is still in the early stages of development and is a work in progress. Expect changes and improvements in the future.
+
 ![FitChrono Numpad](./assets/numpad.png)
 
 # FitChrono
