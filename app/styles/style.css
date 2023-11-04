@@ -102,6 +102,10 @@ body {
 .simple-form .top-container .display:first-of-type {
   margin-bottom: 1rem;
 }
+.simple-form .top-container .display.selected {
+  border: 1px solid OrangeRed;
+  padding: 9px;
+}
 .simple-form .control-buttons {
   display: flex;
   justify-content: space-between;
@@ -109,7 +113,7 @@ body {
   background: white;
 }
 .simple-form .control-buttons button {
-  background: #fc385d;
+  background: DarkSeaGreen;
   border-radius: 1rem;
   border: none;
   padding: 0.125rem 0.25rem;
@@ -125,7 +129,7 @@ body {
 }
 .simple-form .bottom-container {
   background: #d0d0d0;
-  padding: 10px;
+  padding: 0.6rem 1rem;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }

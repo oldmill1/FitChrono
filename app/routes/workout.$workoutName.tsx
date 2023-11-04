@@ -120,9 +120,6 @@ export default function Workout() {
           <span>Set</span>
         </div>
         <div className='grid-item'>
-          <span>Reps</span>
-        </div>
-        <div className='grid-item'>
           <UpdateDefaults workoutId={workout.id} weight={defaultWeight} />
         </div>
       </div>

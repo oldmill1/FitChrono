@@ -1,4 +1,6 @@
 import React from 'react';
+import classNames from 'classnames';
+
 // import { Form } from '@remix-run/react';
 
 // function DataForm({
@@ -24,7 +26,13 @@ export default function UpdateDefaults({
   weight?: number;
   workoutId: number;
 }) {
+  const [repsInput, setRepsInput] = React.useState('0');
   const [usrInput, setUsrInput] = React.useState('0');
+  const [selectedDisplay, setSelectedDisplay] = React.useState('reps');
+
+  function handleDisplaySelect(display) {
+    setSelectedDisplay(display);
+  }
 
   React.useEffect(() => {
     // If weight is a number, set usrInput to the string representation of weight
@@ -49,13 +57,27 @@ export default function UpdateDefaults({
         <div className='heading'>
           <p>Reps</p>
         </div>
-        <div className='display'>0</div>
+        <div
+          className={classNames('display', {
+            selected: selectedDisplay === 'reps',
+          })}
+          onClick={() => handleDisplaySelect('reps')}
+        >
+          0
+        </div>
         <div className='heading'>
           <p>
             Weight <span>(lb)</span>
           </p>
         </div>
-        <div className='display'>{usrInput}</div>
+        <div
+          className={classNames('display', {
+            selected: selectedDisplay === 'weight',
+          })}
+          onClick={() => handleDisplaySelect('weight')}
+        >
+          {usrInput}
+        </div>
       </div>
       <div className='control-buttons'>
         <button onClick={() => handlePress('clear')}>Clear</button>

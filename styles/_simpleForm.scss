@@ -48,36 +48,41 @@
       &:first-of-type {
         margin-bottom: 1rem; // Adds space between the two displays
       }
+
+      &.selected {
+        border: 1px solid OrangeRed;
+        padding: 9px;
+      }
     }
   }
 
   .control-buttons {
     display: flex;
     justify-content: space-between;
-    padding: 0 0.5rem 0.5rem 0.5rem; // Adjust as needed
+    padding: 0 0.5rem 0.5rem 0.5rem;
     background: white;
 
     button {
-      background: #fc385d; // Match the background of other buttons
+      background: DarkSeaGreen;
       border-radius: 1rem;
       border: none;
-      padding: 0.125rem 0.25rem; // Adjust for a more rectangular shape
+      padding: 0.125rem 0.25rem;
       font-size: 1.3rem;
-      color: white; // Match the text color of other buttons
+      color: white;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      font-family: 'Source Code Pro', monospace; // Replace with your monospace font
+      font-family: 'Source Code Pro', monospace;
       font-weight: 600;
 
       &:hover {
-        background-color: #e0e0e0; // A subtle hover effect
+        background-color: #e0e0e0;
       }
     }
   }
 
   .bottom-container {
     background: #d0d0d0;
-    padding: 10px;
+    padding: 0.6rem 1rem;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 
