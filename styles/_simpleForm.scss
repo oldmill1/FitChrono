@@ -43,7 +43,7 @@
       justify-content: flex-end;
       color: ghostwhite;
       margin-top: 0.3rem;
-      font-family: 'VT323', monospace; // Replace with your monospace font
+      font-family: monospace; // Replace with your monospace font
 
       &:first-of-type {
         margin-bottom: 1rem; // Adds space between the two displays
@@ -63,20 +63,20 @@
     background: white;
 
     button {
-      background: DarkSeaGreen;
       border-radius: 1rem;
-      border: none;
-      padding: 0.125rem 0.25rem;
+      border: 1px solid lightgray;
+      padding: 0.125rem 0.5rem;
       font-size: 1.3rem;
-      color: white;
+      color: slategray;
       cursor: pointer;
-      transition: background-color 0.3s ease;
       font-family: 'Source Code Pro', monospace;
       font-weight: 600;
-
-      &:hover {
-        background-color: #e0e0e0;
-      }
+      // very subtle light graident as a background
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.9),
+        rgba(100, 100, 100, 0.1)
+      );
     }
   }
 

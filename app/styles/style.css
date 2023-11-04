@@ -97,7 +97,7 @@ body {
   justify-content: flex-end;
   color: ghostwhite;
   margin-top: 0.3rem;
-  font-family: "VT323", monospace;
+  font-family: monospace;
 }
 .simple-form .top-container .display:first-of-type {
   margin-bottom: 1rem;
@@ -113,19 +113,15 @@ body {
   background: white;
 }
 .simple-form .control-buttons button {
-  background: DarkSeaGreen;
   border-radius: 1rem;
-  border: none;
-  padding: 0.125rem 0.25rem;
+  border: 1px solid lightgray;
+  padding: 0.125rem 0.5rem;
   font-size: 1.3rem;
-  color: white;
+  color: slategray;
   cursor: pointer;
-  transition: background-color 0.3s ease;
   font-family: "Source Code Pro", monospace;
   font-weight: 600;
-}
-.simple-form .control-buttons button:hover {
-  background-color: #e0e0e0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(100, 100, 100, 0.1));
 }
 .simple-form .bottom-container {
   background: #d0d0d0;

@@ -21,33 +21,47 @@ import classNames from 'classnames';
 
 export default function UpdateDefaults({
   weight = 0,
+  reps = 0,
   workoutId,
 }: {
   weight?: number;
   workoutId: number;
+  reps?: number;
 }) {
   const [repsInput, setRepsInput] = React.useState('0');
-  const [usrInput, setUsrInput] = React.useState('0');
+  const [weightInput, setWeightInput] = React.useState('0');
   const [selectedDisplay, setSelectedDisplay] = React.useState('reps');
+  const [originalWeight] = React.useState(weight);
+  const [originalReps] = React.useState(reps);
 
-  function handleDisplaySelect(display) {
+  function handleDisplaySelect(display: string) {
     setSelectedDisplay(display);
   }
 
   React.useEffect(() => {
     // If weight is a number, set usrInput to the string representation of weight
-    setUsrInput(Math.floor(weight).toString());
+    setWeightInput(Math.floor(weight).toString());
+    setRepsInput(Math.floor(reps).toString());
   }, [weight]); // This effect runs on component mount and whenever weight changes
 
   function handlePress(action: string) {
     const numberAction = Number(action);
     if (!isNaN(numberAction)) {
-      setUsrInput(usrInput === '0' ? action : usrInput + action);
+      if (selectedDisplay === 'reps') {
+        setRepsInput(repsInput === '0' ? action : repsInput + action);
+      } else if (selectedDisplay === 'weight') {
+        setWeightInput(weightInput === '0' ? action : weightInput + action);
+      }
     } else {
       switch (action) {
-        case 'clear':
-          setUsrInput('0');
+        case 'convert':
           break;
+        case 'reset':
+          if (selectedDisplay === 'reps') {
+            setRepsInput(Math.floor(originalReps).toString()); // Assuming 'reps' is the original value for reps
+          } else if (selectedDisplay === 'weight') {
+            setWeightInput(Math.floor(originalWeight).toString()); // Assuming 'weight' is the original value for weight
+          }
       }
     }
   }
@@ -63,7 +77,7 @@ export default function UpdateDefaults({
           })}
           onClick={() => handleDisplaySelect('reps')}
         >
-          0
+          {repsInput}
         </div>
         <div className='heading'>
           <p>
@@ -76,11 +90,11 @@ export default function UpdateDefaults({
           })}
           onClick={() => handleDisplaySelect('weight')}
         >
-          {usrInput}
+          {weightInput}
         </div>
       </div>
       <div className='control-buttons'>
-        <button onClick={() => handlePress('clear')}>Clear</button>
+        <button onClick={() => handlePress('reset')}>Reset</button>
         <button onClick={() => handlePress('convert')}>Convert</button>
         <button onClick={() => handlePress('copy')}>Copy</button>
       </div>
