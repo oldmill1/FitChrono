@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
+import clickSound from '~/sounds/click.mp3';
 
 // import { Form } from '@remix-run/react';
 
@@ -39,6 +40,11 @@ export default function UpdateDefaults({
     reps: 'overwrite',
     weight: 'overwrite',
   });
+
+  const playClickSound = () => {
+    const audio = new Audio(clickSound);
+    audio.play();
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
     // Check if the clicked element is one of the input buttons
@@ -90,6 +96,7 @@ export default function UpdateDefaults({
   }, [reps, weight]); // This effect runs on component mount and whenever weight changes
 
   function handlePress(action: string) {
+    playClickSound();
     const numberAction = Number(action);
     if (!isNaN(numberAction)) {
       if (selectedDisplay === 'reps') {
