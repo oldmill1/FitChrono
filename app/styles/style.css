@@ -1,5 +1,5 @@
 body {
-  background: #191e25;
+  background: #1c262a;
 }
 
 .strengthBar {
@@ -163,6 +163,9 @@ body {
   justify-content: space-between;
   margin: 1rem 0;
 }
+.simple-form .bottom-container .buttons .row:last-of-type button {
+  max-width: 6.25rem;
+}
 .simple-form .bottom-container .buttons .row button {
   padding: 0.6rem 2rem;
   margin: 0 0.6rem;
@@ -219,6 +222,9 @@ body {
   background: #d0d0d0;
   border-color: #b8b8b8;
   color: #6f6f6f;
+}
+.simple-form .default-weight-form {
+  display: none;
 }
 
 .grid-container {

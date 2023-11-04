@@ -2,24 +2,25 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import classNames from 'classnames';
 import clickSound from '~/sounds/click.mp3';
 import clickSound2 from '~/sounds/click2.mp3';
+import clickSound3 from '~/sounds/click3.mp3';
+import { Form } from '@remix-run/react';
+import { useSubmit } from '@remix-run/react';
 
-// import { Form } from '@remix-run/react';
-
-// function DataForm({
-//   weight,
-//   workoutId,
-// }: {
-//   weight: number;
-//   workoutId: number;
-// }) {
-//   return (
-//     <Form id='default-weight-form' method='post'>
-//       <input name='weight' type='number' defaultValue={weight} />
-//       <input type='hidden' name='workoutId' value={workoutId} />
-//       <button type='submit'>Update</button>
-//     </Form>
-//   );
-// }
+function InvisibleDataForm({
+  weight,
+  workoutId,
+}: {
+  weight: number;
+  workoutId: number;
+}) {
+  return (
+    <Form id='default-weight-form' method='post'>
+      <input name='weight' type='number' defaultValue={weight} />
+      <input type='hidden' name='workoutId' value={workoutId} />
+      <button type='submit'>Update</button>
+    </Form>
+  );
+}
 
 export default function UpdateDefaults({
   weight = 0,
@@ -32,7 +33,7 @@ export default function UpdateDefaults({
 }) {
   const [repsInput, setRepsInput] = useState('0');
   const [weightInput, setWeightInput] = useState('0');
-  const [selectedDisplay, setSelectedDisplay] = useState('reps');
+  const [selectedDisplay, setSelectedDisplay] = useState('weight');
   const [originalWeight] = useState(weight);
   const [originalReps] = useState(reps);
   const repsDisplayRef = useRef<HTMLDivElement>(null);
@@ -41,6 +42,9 @@ export default function UpdateDefaults({
     reps: 'overwrite',
     weight: 'overwrite',
   });
+  const [formWeight, setFormWeight] = useState(weight);
+  const [formReps, setFormReps] = useState(reps);
+  const submit = useSubmit();
 
   const playClickSound = async (soundId: string) => {
     let soundToPlay;
@@ -50,6 +54,9 @@ export default function UpdateDefaults({
         break;
       case '2':
         soundToPlay = clickSound2;
+        break;
+      case '3':
+        soundToPlay = clickSound3;
         break;
       default:
         console.error('Invalid soundId');
@@ -78,7 +85,6 @@ export default function UpdateDefaults({
       (weightDisplayRef.current &&
         !weightDisplayRef.current.contains(event.target as Node))
     ) {
-      console.log('switching to overwrite');
       // Set the state to 'overwrite' for both reps and weight
       setDisplayStates((prevState) => ({
         ...prevState,
@@ -149,6 +155,25 @@ export default function UpdateDefaults({
             setWeightInput(Math.floor(originalWeight).toString()); // Assuming 'weight' is the original value for weight
           }
       }
+    }
+  }
+  async function handleSubmit() {
+    // Log the workout
+    // Get the weight from weighInput
+    // turn it into a number
+    // and update formWeight with it
+    try {
+      await playClickSound('3');
+    } catch (error) {
+      console.error('Error playing sound', error);
+    }
+    const weightNumber = Number(weightInput);
+    if (!isNaN(weightNumber)) {
+      setFormWeight(weightNumber);
+      const formData = new FormData();
+      formData.append('weight', weightNumber.toString());
+      formData.append('workoutId', workoutId.toString());
+      submit(formData, { method: 'post' });
     }
   }
   return (
@@ -223,11 +248,22 @@ export default function UpdateDefaults({
               3
             </button>
           </div>
+          <div className='row'>
+            <button className='aqua-button' onClick={() => handlePress('0')}>
+              0
+            </button>
+          </div>
         </div>
         <div className='submit-log'>
-          <button className='aqua-button aqua-button-confirm'>Log</button>
+          <button
+            onClick={handleSubmit}
+            className='aqua-button aqua-button-confirm'
+          >
+            Log
+          </button>
         </div>
       </div>
+      <InvisibleDataForm weight={formWeight} workoutId={workoutId} />
     </div>
   );
 }
