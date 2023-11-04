@@ -34,20 +34,36 @@ export default function UpdateDefaults({
   const [originalWeight] = useState(weight);
   const [originalReps] = useState(reps);
   const repsDisplayRef = useRef<HTMLDivElement>(null);
+  const weightDisplayRef = useRef<HTMLDivElement>(null);
   const [displayStates, setDisplayStates] = useState({
     reps: 'overwrite',
     weight: 'overwrite',
   });
 
-  console.log({ displayStates });
-
   const handleClickOutside = (event: MouseEvent) => {
+    // Check if the clicked element is one of the input buttons
     if (
-      repsDisplayRef.current &&
-      !repsDisplayRef.current.contains(event.target as Node)
+      event.target &&
+      (event.target as HTMLElement).closest('.complete-set-button')
     ) {
-      // do something
-      console.log('test');
+      // If it's one of the buttons, do nothing and return early
+      return;
+    }
+
+    // Check if the click is outside both the repsDisplayRef and weightDisplayRef
+    if (
+      (repsDisplayRef.current &&
+        !repsDisplayRef.current.contains(event.target as Node)) ||
+      (weightDisplayRef.current &&
+        !weightDisplayRef.current.contains(event.target as Node))
+    ) {
+      console.log('switching to overwrite');
+      // Set the state to 'overwrite' for both reps and weight
+      setDisplayStates((prevState) => ({
+        ...prevState,
+        reps: 'overwrite',
+        weight: 'overwrite',
+      }));
     }
   };
 
@@ -61,7 +77,7 @@ export default function UpdateDefaults({
         handleClickOutside as EventListener,
       );
     };
-  }, []);
+  }, [handleClickOutside]);
 
   function handleDisplaySelect(display: string) {
     setSelectedDisplay(display);
@@ -71,7 +87,7 @@ export default function UpdateDefaults({
     // If weight is a number, set usrInput to the string representation of weight
     setWeightInput(Math.floor(weight).toString());
     setRepsInput(Math.floor(reps).toString());
-  }, [weight]); // This effect runs on component mount and whenever weight changes
+  }, [reps, weight]); // This effect runs on component mount and whenever weight changes
 
   function handlePress(action: string) {
     const numberAction = Number(action);
@@ -84,7 +100,12 @@ export default function UpdateDefaults({
           setRepsInput(repsInput === '0' ? action : repsInput + action);
         }
       } else if (selectedDisplay === 'weight') {
-        setWeightInput(weightInput === '0' ? action : weightInput + action);
+        if (displayStates.weight === 'overwrite') {
+          setWeightInput(action);
+          setDisplayStates({ ...displayStates, weight: 'append' });
+        } else {
+          setWeightInput(weightInput === '0' ? action : weightInput + action);
+        }
       }
     } else {
       switch (action) {
@@ -121,6 +142,7 @@ export default function UpdateDefaults({
           className={classNames('display', {
             selected: selectedDisplay === 'weight',
           })}
+          ref={weightDisplayRef}
           onClick={() => handleDisplaySelect('weight')}
         >
           {weightInput}
