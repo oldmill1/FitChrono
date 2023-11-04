@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import classNames from 'classnames';
 import clickSound from '~/sounds/click.mp3';
 
@@ -41,17 +41,19 @@ export default function UpdateDefaults({
     weight: 'overwrite',
   });
 
-  const playClickSound = () => {
+  const playClickSound = async () => {
     const audio = new Audio(clickSound);
-    audio.play();
+    try {
+      await audio.play();
+      // Playback started!
+    } catch (error) {
+      console.error('Playback failed! Error:', error);
+    }
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
+  const handleClickOutside = useCallback((event: MouseEvent) => {
     // Check if the clicked element is one of the input buttons
-    if (
-      event.target &&
-      (event.target as HTMLElement).closest('.complete-set-button')
-    ) {
+    if (event.target && (event.target as HTMLElement).closest('.aqua-button')) {
       // If it's one of the buttons, do nothing and return early
       return;
     }
@@ -71,7 +73,7 @@ export default function UpdateDefaults({
         weight: 'overwrite',
       }));
     }
-  };
+  }, []);
 
   useEffect(() => {
     // Add when mounted
@@ -95,8 +97,12 @@ export default function UpdateDefaults({
     setRepsInput(Math.floor(reps).toString());
   }, [reps, weight]); // This effect runs on component mount and whenever weight changes
 
-  function handlePress(action: string) {
-    playClickSound();
+  async function handlePress(action: string) {
+    try {
+      await playClickSound();
+    } catch (error) {
+      console.error('Error playing sound', error);
+    }
     const numberAction = Number(action);
     if (!isNaN(numberAction)) {
       if (selectedDisplay === 'reps') {
@@ -163,70 +169,41 @@ export default function UpdateDefaults({
       <div className='bottom-container'>
         <div className='buttons'>
           <div className='row'>
-            <button
-              className='complete-set-button'
-              onClick={() => handlePress('7')}
-            >
+            <button className='aqua-button' onClick={() => handlePress('7')}>
               7
             </button>
-            <button
-              className='complete-set-button'
-              onClick={() => handlePress('8')}
-            >
+            <button className='aqua-button' onClick={() => handlePress('8')}>
               8
             </button>
-            <button
-              className='complete-set-button'
-              onClick={() => handlePress('9')}
-            >
+            <button className='aqua-button' onClick={() => handlePress('9')}>
               9
             </button>
           </div>
           <div className='row'>
-            <button
-              className='complete-set-button'
-              onClick={() => handlePress('4')}
-            >
+            <button className='aqua-button' onClick={() => handlePress('4')}>
               4
             </button>
-            <button
-              className='complete-set-button'
-              onClick={() => handlePress('5')}
-            >
+            <button className='aqua-button' onClick={() => handlePress('5')}>
               5
             </button>
-            <button
-              className='complete-set-button'
-              onClick={() => handlePress('6')}
-            >
+            <button className='aqua-button' onClick={() => handlePress('6')}>
               6
             </button>
           </div>
           <div className='row'>
-            <button
-              className='complete-set-button'
-              onClick={() => handlePress('1')}
-            >
+            <button className='aqua-button' onClick={() => handlePress('1')}>
               1
             </button>
-            <button
-              className='complete-set-button'
-              onClick={() => handlePress('2')}
-            >
+            <button className='aqua-button' onClick={() => handlePress('2')}>
               2
             </button>
-            <button
-              className='complete-set-button'
-              onClick={() => handlePress('3')}
-            >
+            <button className='aqua-button' onClick={() => handlePress('3')}>
               3
             </button>
           </div>
         </div>
         <div className='submit-log'>
-          <button className='complete-set-button complete-set-button-confirm'>
-            Log
-          </button>
+          <button className='aqua-button aqua-button-confirm'>Log</button>
         </div>
       </div>
     </div>
