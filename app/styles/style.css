@@ -67,6 +67,31 @@ body {
   padding: 20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.simple-form .top-container .reps-display,
+.simple-form .top-container .weight-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.simple-form .top-container .reps-display {
+  flex: 0 0 33%;
+  max-width: 33%;
+}
+.simple-form .top-container .reps-display .display {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.simple-form .top-container .weight-display {
+  flex: 1;
+  max-width: 61%;
+}
+.simple-form .top-container .weight-display .display {
+  overflow-x: auto;
+  white-space: nowrap;
 }
 .simple-form .top-container .heading {
   text-align: center;
@@ -103,7 +128,8 @@ body {
   margin-bottom: 1rem;
 }
 .simple-form .top-container .display.selected {
-  border: 1px solid OrangeRed;
+  border: 1px solid cornflowerblue;
+  box-shadow: 0 0 7px cornflowerblue;
   padding: 9px;
 }
 .simple-form .control-buttons {

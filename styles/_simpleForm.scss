@@ -10,6 +10,39 @@
     padding: 20px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    .reps-display,
+    .weight-display {
+      // Common styles for both displays can be placed here if needed.
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .reps-display {
+      flex: 0 0 33%; // This will make the reps-display div take up 30% of the top-container's width.
+      // Additional styling for reps-display can be placed here.
+      max-width: 33%;
+
+      .display {
+        overflow-x: auto; // This will allow the content to scroll horizontally
+        white-space: nowrap; // This prevents the text from wrapping to a new line
+      }
+    }
+
+    .weight-display {
+      flex: 1; // This will allow the weight-display div to take up the remaining space.
+      // Additional styling for weight-display can be placed here.
+      max-width: 61%;
+
+      .display {
+        overflow-x: auto; // This will allow the content to scroll horizontally
+        white-space: nowrap; // This prevents the text from wrapping to a new line
+      }
+    }
 
     .heading {
       text-align: center;
@@ -51,7 +84,9 @@
       }
 
       &.selected {
-        border: 1px solid OrangeRed;
+        border: 1px solid cornflowerblue;
+        // a glow as well
+        box-shadow: 0 0 7px cornflowerblue;
         padding: 9px;
       }
     }
@@ -152,14 +187,6 @@
         top: 3px; // slight move down to match the button's movement
       }
     }
-    //
-    //&:hover {
-    //  box-shadow:
-    //    inset 0 13px 25px rgba(255, 255, 255, 0.8),
-    //    0 3px 5px rgba(0, 0, 0, 0.2),
-    //    0 10px 13px rgba(0, 0, 0, 0.2);
-    //  transform: scale(1.02);
-    //}
 
     &:before {
       background: linear-gradient(

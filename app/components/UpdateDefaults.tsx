@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import classNames from 'classnames';
 import clickSound from '~/sounds/click.mp3';
+import clickSound2 from '~/sounds/click2.mp3';
 
 // import { Form } from '@remix-run/react';
 
@@ -41,8 +42,20 @@ export default function UpdateDefaults({
     weight: 'overwrite',
   });
 
-  const playClickSound = async () => {
-    const audio = new Audio(clickSound);
+  const playClickSound = async (soundId: string) => {
+    let soundToPlay;
+    switch (soundId) {
+      case '1':
+        soundToPlay = clickSound;
+        break;
+      case '2':
+        soundToPlay = clickSound2;
+        break;
+      default:
+        console.error('Invalid soundId');
+        return;
+    }
+    const audio = new Audio(soundToPlay);
     try {
       await audio.play();
       // Playback started!
@@ -98,13 +111,13 @@ export default function UpdateDefaults({
   }, [reps, weight]); // This effect runs on component mount and whenever weight changes
 
   async function handlePress(action: string) {
-    try {
-      await playClickSound();
-    } catch (error) {
-      console.error('Error playing sound', error);
-    }
     const numberAction = Number(action);
     if (!isNaN(numberAction)) {
+      try {
+        await playClickSound('1');
+      } catch (error) {
+        console.error('Error playing sound', error);
+      }
       if (selectedDisplay === 'reps') {
         if (displayStates.reps === 'overwrite') {
           setRepsInput(action);
@@ -121,6 +134,11 @@ export default function UpdateDefaults({
         }
       }
     } else {
+      try {
+        await playClickSound('2');
+      } catch (error) {
+        console.error('Error playing sound', error);
+      }
       switch (action) {
         case 'convert':
           break;
@@ -136,29 +154,33 @@ export default function UpdateDefaults({
   return (
     <div className='simple-form'>
       <div className='top-container'>
-        <div className='heading'>
-          <p>Reps</p>
+        <div className='reps-display'>
+          <div className='heading'>
+            <p>Reps</p>
+          </div>
+          <div
+            className={classNames('display', {
+              selected: selectedDisplay === 'reps',
+            })}
+            ref={repsDisplayRef}
+            onClick={() => handleDisplaySelect('reps')}
+          >
+            {repsInput}
+          </div>
         </div>
-        <div
-          className={classNames('display', {
-            selected: selectedDisplay === 'reps',
-          })}
-          ref={repsDisplayRef}
-          onClick={() => handleDisplaySelect('reps')}
-        >
-          {repsInput}
-        </div>
-        <div className='heading'>
-          <p>Weight</p>
-        </div>
-        <div
-          className={classNames('display', {
-            selected: selectedDisplay === 'weight',
-          })}
-          ref={weightDisplayRef}
-          onClick={() => handleDisplaySelect('weight')}
-        >
-          {weightInput}
+        <div className='weight-display'>
+          <div className='heading'>
+            <p>Weight</p>
+          </div>
+          <div
+            className={classNames('display', {
+              selected: selectedDisplay === 'weight',
+            })}
+            ref={weightDisplayRef}
+            onClick={() => handleDisplaySelect('weight')}
+          >
+            {weightInput}
+          </div>
         </div>
       </div>
       <div className='control-buttons'>

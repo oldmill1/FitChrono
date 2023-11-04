@@ -1,4 +1,4 @@
-![FitChrono Numpad](./assets/fitchrono_numpad.png)
+![FitChrono Numpad](./assets/numpad.png)
 
 # FitChrono
 
