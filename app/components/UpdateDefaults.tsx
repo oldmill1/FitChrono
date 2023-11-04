@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
 // import { Form } from '@remix-run/react';
@@ -28,17 +28,46 @@ export default function UpdateDefaults({
   workoutId: number;
   reps?: number;
 }) {
-  const [repsInput, setRepsInput] = React.useState('0');
-  const [weightInput, setWeightInput] = React.useState('0');
-  const [selectedDisplay, setSelectedDisplay] = React.useState('reps');
-  const [originalWeight] = React.useState(weight);
-  const [originalReps] = React.useState(reps);
+  const [repsInput, setRepsInput] = useState('0');
+  const [weightInput, setWeightInput] = useState('0');
+  const [selectedDisplay, setSelectedDisplay] = useState('reps');
+  const [originalWeight] = useState(weight);
+  const [originalReps] = useState(reps);
+  const repsDisplayRef = useRef<HTMLDivElement>(null);
+  const [displayStates, setDisplayStates] = useState({
+    reps: 'overwrite',
+    weight: 'overwrite',
+  });
+
+  console.log({ displayStates });
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      repsDisplayRef.current &&
+      !repsDisplayRef.current.contains(event.target as Node)
+    ) {
+      // do something
+      console.log('test');
+    }
+  };
+
+  useEffect(() => {
+    // Add when mounted
+    document.addEventListener('mousedown', handleClickOutside as EventListener);
+    // Return function to be called when unmounted
+    return () => {
+      document.removeEventListener(
+        'mousedown',
+        handleClickOutside as EventListener,
+      );
+    };
+  }, []);
 
   function handleDisplaySelect(display: string) {
     setSelectedDisplay(display);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     // If weight is a number, set usrInput to the string representation of weight
     setWeightInput(Math.floor(weight).toString());
     setRepsInput(Math.floor(reps).toString());
@@ -48,7 +77,12 @@ export default function UpdateDefaults({
     const numberAction = Number(action);
     if (!isNaN(numberAction)) {
       if (selectedDisplay === 'reps') {
-        setRepsInput(repsInput === '0' ? action : repsInput + action);
+        if (displayStates.reps === 'overwrite') {
+          setRepsInput(action);
+          setDisplayStates({ ...displayStates, reps: 'append' });
+        } else {
+          setRepsInput(repsInput === '0' ? action : repsInput + action);
+        }
       } else if (selectedDisplay === 'weight') {
         setWeightInput(weightInput === '0' ? action : weightInput + action);
       }
@@ -75,12 +109,13 @@ export default function UpdateDefaults({
           className={classNames('display', {
             selected: selectedDisplay === 'reps',
           })}
+          ref={repsDisplayRef}
           onClick={() => handleDisplaySelect('reps')}
         >
           {repsInput}
         </div>
         <div className='heading'>
-          <p>Weight (lb)</p>
+          <p>Weight</p>
         </div>
         <div
           className={classNames('display', {
@@ -100,19 +135,19 @@ export default function UpdateDefaults({
         <div className='buttons'>
           <div className='row'>
             <button
-              className='complete-set-button complete-set-button-cancel'
+              className='complete-set-button'
               onClick={() => handlePress('7')}
             >
               7
             </button>
             <button
-              className='complete-set-button complete-set-button-cancel'
+              className='complete-set-button'
               onClick={() => handlePress('8')}
             >
               8
             </button>
             <button
-              className='complete-set-button complete-set-button-cancel'
+              className='complete-set-button'
               onClick={() => handlePress('9')}
             >
               9
@@ -120,19 +155,19 @@ export default function UpdateDefaults({
           </div>
           <div className='row'>
             <button
-              className='complete-set-button complete-set-button-cancel'
+              className='complete-set-button'
               onClick={() => handlePress('4')}
             >
               4
             </button>
             <button
-              className='complete-set-button complete-set-button-cancel'
+              className='complete-set-button'
               onClick={() => handlePress('5')}
             >
               5
             </button>
             <button
-              className='complete-set-button complete-set-button-cancel'
+              className='complete-set-button'
               onClick={() => handlePress('6')}
             >
               6
@@ -140,19 +175,19 @@ export default function UpdateDefaults({
           </div>
           <div className='row'>
             <button
-              className='complete-set-button complete-set-button-cancel'
+              className='complete-set-button'
               onClick={() => handlePress('1')}
             >
               1
             </button>
             <button
-              className='complete-set-button complete-set-button-cancel'
+              className='complete-set-button'
               onClick={() => handlePress('2')}
             >
               2
             </button>
             <button
-              className='complete-set-button complete-set-button-cancel'
+              className='complete-set-button'
               onClick={() => handlePress('3')}
             >
               3

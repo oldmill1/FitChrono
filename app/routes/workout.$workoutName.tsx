@@ -99,8 +99,6 @@ export default function Workout() {
   const { workout, muscleGroup, defaultReps, defaultWeight } =
     useLoaderData<typeof loader>();
   const actionData = useActionData<ActionData>();
-  console.log({ actionData });
-  // console.log({ workout });
   return (
     <div>
       <StrengthBar
