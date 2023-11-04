@@ -80,9 +80,7 @@ export default function UpdateDefaults({
           {repsInput}
         </div>
         <div className='heading'>
-          <p>
-            Weight <span>(lb)</span>
-          </p>
+          <p>Weight (lb)</p>
         </div>
         <div
           className={classNames('display', {
@@ -101,22 +99,71 @@ export default function UpdateDefaults({
       <div className='bottom-container'>
         <div className='buttons'>
           <div className='row'>
-            <button onClick={() => handlePress('7')}>7</button>
-            <button onClick={() => handlePress('8')}>8</button>
-            <button onClick={() => handlePress('9')}>9</button>
+            <button
+              className='complete-set-button complete-set-button-cancel'
+              onClick={() => handlePress('7')}
+            >
+              7
+            </button>
+            <button
+              className='complete-set-button complete-set-button-cancel'
+              onClick={() => handlePress('8')}
+            >
+              8
+            </button>
+            <button
+              className='complete-set-button complete-set-button-cancel'
+              onClick={() => handlePress('9')}
+            >
+              9
+            </button>
           </div>
           <div className='row'>
-            <button onClick={() => handlePress('4')}>4</button>
-            <button onClick={() => handlePress('5')}>5</button>
-            <button onClick={() => handlePress('6')}>6</button>
+            <button
+              className='complete-set-button complete-set-button-cancel'
+              onClick={() => handlePress('4')}
+            >
+              4
+            </button>
+            <button
+              className='complete-set-button complete-set-button-cancel'
+              onClick={() => handlePress('5')}
+            >
+              5
+            </button>
+            <button
+              className='complete-set-button complete-set-button-cancel'
+              onClick={() => handlePress('6')}
+            >
+              6
+            </button>
           </div>
           <div className='row'>
-            <button onClick={() => handlePress('1')}>1</button>
-            <button onClick={() => handlePress('2')}>2</button>
-            <button onClick={() => handlePress('3')}>3</button>
+            <button
+              className='complete-set-button complete-set-button-cancel'
+              onClick={() => handlePress('1')}
+            >
+              1
+            </button>
+            <button
+              className='complete-set-button complete-set-button-cancel'
+              onClick={() => handlePress('2')}
+            >
+              2
+            </button>
+            <button
+              className='complete-set-button complete-set-button-cancel'
+              onClick={() => handlePress('3')}
+            >
+              3
+            </button>
           </div>
         </div>
-        <button className='complete-set-button'>Record Set</button>
+        <div className='submit-log'>
+          <button className='complete-set-button complete-set-button-confirm'>
+            Log
+          </button>
+        </div>
       </div>
     </div>
   );

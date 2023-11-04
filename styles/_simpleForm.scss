@@ -2,7 +2,7 @@
   background: #f0f0f0;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  max-width: 27rem;
   margin: 20px auto;
 
   .top-container {
@@ -32,7 +32,7 @@
 
     .display {
       background: slategray;
-      padding: 10px;
+
       border-radius: 5px;
       font-size: 2.7em;
       text-align: right;
@@ -43,7 +43,8 @@
       justify-content: flex-end;
       color: ghostwhite;
       margin-top: 0.3rem;
-      font-family: monospace; // Replace with your monospace font
+      font-family: monospace; // Replace with another monospace font
+      padding: 10px; // needs to be exact to match the border
 
       &:first-of-type {
         margin-bottom: 1rem; // Adds space between the two displays
@@ -59,8 +60,8 @@
   .control-buttons {
     display: flex;
     justify-content: space-between;
-    padding: 0 0.5rem 0.5rem 0.5rem;
     background: white;
+    padding: 0 3.2rem;
 
     button {
       border-radius: 1rem;
@@ -81,81 +82,97 @@
   }
 
   .bottom-container {
-    background: #d0d0d0;
-    padding: 0.6rem 1rem;
+    // background gradient top lightgray, bottom slategray
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.9),
+      rgba(100, 100, 100, 0.1)
+    );
+    padding: 0.6rem 2.1rem;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 
     .buttons {
+      padding: 0 1.1rem;
       .row {
         display: flex;
         justify-content: space-between;
-        padding: 5px 0;
+        margin: 1rem 0;
 
         button {
-          border: none;
-          background: #fafafa;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 60px;
-          height: 60px;
-          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-          cursor: pointer;
-          user-select: none;
-          color: #98b9f9;
-          font-family: 'Source Code Pro', monospace; // Replace with your monospace font
-          font-size: 1.9rem;
-          transition:
-            background-color 0.3s,
-            box-shadow 0.3s;
-
-          &:hover {
-            background-color: #f2f2f2;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+          padding: 0.6rem 2rem;
+          margin: 0 0.6rem;
+          // Remove left margin for the first button in each row
+          &:nth-child(1) {
+            margin-left: 0;
           }
 
-          &:active {
-            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+          // Remove right margin for the last button in each row
+          &:nth-child(3) {
+            margin-right: 0;
           }
         }
       }
     }
   }
 
+  .submit-log {
+    display: flex;
+    justify-content: space-between;
+    // center
+    align-items: center;
+    padding: 1rem 0;
+  }
+
   .complete-set-button {
-    background: slategray;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 15px 30px;
-    font-size: 1.2em;
-    font-weight: bold;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    -webkit-appearance: none;
+    border: 1px solid #ccc;
+    border-radius: 125px;
     box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.2),
-      inset 0 1px 2px rgba(255, 255, 255, 0.5);
-    margin: 20px auto;
-    display: block; // Center the button
+      inset 0 13px 25px rgba(255, 255, 255, 0.5),
+      0 3px 5px rgba(0, 0, 0, 0.2),
+      0 10px 13px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition:
-      background-color 0.3s,
-      box-shadow 0.3s;
+    font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+    font-size: 2rem;
+    padding: 1.2rem 4rem;
+    position: relative;
+    transition: all ease 0.3s;
     width: 100%;
 
     &:hover {
-      background-color: darkslategray; // Darker blue on hover
       box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.25),
-        inset 0 1px 2px rgba(255, 255, 255, 0.75);
+        inset 0 13px 25px rgba(255, 255, 255, 0.8),
+        0 3px 5px rgba(0, 0, 0, 0.2),
+        0 10px 13px rgba(0, 0, 0, 0.2);
+      transform: scale(1.02);
     }
 
-    &:active {
-      background-color: darkslategray; // Even darker on active
-      box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.2),
-        inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    &:before {
+      background: linear-gradient(
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      border-radius: 125px;
+      content: '';
+      height: 50px;
+      left: 4%;
+      position: absolute;
+      top: 1px;
+      transition: all ease 0.3s;
+      width: 92%;
+    }
+
+    &-confirm {
+      background: #4a90e2;
+      border-color: #3672b6;
+      color: #fff;
+    }
+
+    &-cancel {
+      background: #d0d0d0;
+      border-color: #b8b8b8;
+      color: #6f6f6f;
     }
   }
 }

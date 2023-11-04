@@ -59,7 +59,7 @@ body {
   background: #f0f0f0;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 300px;
+  max-width: 27rem;
   margin: 20px auto;
 }
 .simple-form .top-container {
@@ -86,7 +86,6 @@ body {
 }
 .simple-form .top-container .display {
   background: slategray;
-  padding: 10px;
   border-radius: 5px;
   font-size: 2.7em;
   text-align: right;
@@ -98,6 +97,7 @@ body {
   color: ghostwhite;
   margin-top: 0.3rem;
   font-family: monospace;
+  padding: 10px;
 }
 .simple-form .top-container .display:first-of-type {
   margin-bottom: 1rem;
@@ -109,8 +109,8 @@ body {
 .simple-form .control-buttons {
   display: flex;
   justify-content: space-between;
-  padding: 0 0.5rem 0.5rem 0.5rem;
   background: white;
+  padding: 0 3.2rem;
 }
 .simple-form .control-buttons button {
   border-radius: 1rem;
@@ -124,63 +124,72 @@ body {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(100, 100, 100, 0.1));
 }
 .simple-form .bottom-container {
-  background: #d0d0d0;
-  padding: 0.6rem 1rem;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(100, 100, 100, 0.1));
+  padding: 0.6rem 2.1rem;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+.simple-form .bottom-container .buttons {
+  padding: 0 1.1rem;
 }
 .simple-form .bottom-container .buttons .row {
   display: flex;
   justify-content: space-between;
-  padding: 5px 0;
+  margin: 1rem 0;
 }
 .simple-form .bottom-container .buttons .row button {
-  border: none;
-  background: #fafafa;
-  border-radius: 50%;
+  padding: 0.6rem 2rem;
+  margin: 0 0.6rem;
+}
+.simple-form .bottom-container .buttons .row button:nth-child(1) {
+  margin-left: 0;
+}
+.simple-form .bottom-container .buttons .row button:nth-child(3) {
+  margin-right: 0;
+}
+.simple-form .submit-log {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  width: 60px;
-  height: 60px;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  user-select: none;
-  color: #98b9f9;
-  font-family: "Source Code Pro", monospace;
-  font-size: 1.9rem;
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
-.simple-form .bottom-container .buttons .row button:hover {
-  background-color: #f2f2f2;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-}
-.simple-form .bottom-container .buttons .row button:active {
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
 }
 .simple-form .complete-set-button {
-  background: slategray;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  padding: 15px 30px;
-  font-size: 1.2em;
-  font-weight: bold;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.5);
-  margin: 20px auto;
-  display: block;
+  -webkit-appearance: none;
+  border: 1px solid #ccc;
+  border-radius: 125px;
+  box-shadow: inset 0 13px 25px rgba(255, 255, 255, 0.5), 0 3px 5px rgba(0, 0, 0, 0.2), 0 10px 13px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  padding: 1.2rem 4rem;
+  position: relative;
+  transition: all ease 0.3s;
   width: 100%;
 }
 .simple-form .complete-set-button:hover {
-  background-color: darkslategray;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 13px 25px rgba(255, 255, 255, 0.8), 0 3px 5px rgba(0, 0, 0, 0.2), 0 10px 13px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
 }
-.simple-form .complete-set-button:active {
-  background-color: darkslategray;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+.simple-form .complete-set-button:before {
+  background: linear-gradient(rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50px;
+  left: 4%;
+  position: absolute;
+  top: 1px;
+  transition: all ease 0.3s;
+  width: 92%;
+}
+.simple-form .complete-set-button-confirm {
+  background: #4a90e2;
+  border-color: #3672b6;
+  color: #fff;
+}
+.simple-form .complete-set-button-cancel {
+  background: #d0d0d0;
+  border-color: #b8b8b8;
+  color: #6f6f6f;
 }
 
 .grid-container {

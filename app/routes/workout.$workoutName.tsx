@@ -115,13 +115,8 @@ export default function Workout() {
           },
         ]}
       />
-      <div className='grid-container'>
-        <div className='grid-item'>
-          <span>Set</span>
-        </div>
-        <div className='grid-item'>
-          <UpdateDefaults workoutId={workout.id} weight={defaultWeight} />
-        </div>
+      <div className='workout-tracker'>
+        <UpdateDefaults workoutId={workout.id} weight={defaultWeight} />
       </div>
     </div>
   );
