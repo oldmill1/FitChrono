@@ -283,6 +283,19 @@ body {
   font-size: 1.1rem;
 }
 
+.page-container {
+  display: flex;
+  padding: 1rem;
+  gap: 0.6rem;
+}
+
+.column-a {
+  width: 30%;
+}
+.column-b {
+  width: 70%;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;

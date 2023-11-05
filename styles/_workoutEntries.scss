@@ -1,0 +1,15 @@
+.page-container {
+  display: flex;
+  padding: 1rem;
+  gap: 0.6rem;
+}
+
+.column {
+  &-a {
+    width: 30%;
+  }
+
+  &-b {
+    width: 70%;
+  }
+}
