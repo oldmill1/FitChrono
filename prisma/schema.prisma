@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,7 +11,6 @@ model User {
   id              Int               @id @default(autoincrement())
   email           String            @unique
   password        String
-  workoutLogs     WorkoutLog[]
   workoutDefaults WorkoutDefaults[]
   WorkoutEntry    WorkoutEntry[]
 }
@@ -32,18 +28,8 @@ model Workout {
   displayName     String
   muscleGroupId   Int
   muscleGroup     MuscleGroup       @relation(fields: [muscleGroupId], references: [id])
-  workoutLogs     WorkoutLog[]
   workoutDefaults WorkoutDefaults[]
   WorkoutEntry    WorkoutEntry[]
-}
-
-model WorkoutLog {
-  id        Int      @id @default(autoincrement())
-  workoutId Int
-  userId    Int
-  date      DateTime
-  workout   Workout  @relation(fields: [workoutId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
 }
 
 model WorkoutDefaults {

@@ -12,6 +12,7 @@ import { useTweets } from '~/contexts/useTweets';
 type ActionData = {
   success?: string;
   error?: string;
+  workoutEntryId?: string;
 };
 
 export const action = async ({ params, request }: LoaderFunctionArgs) => {
@@ -25,16 +26,16 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
   invariant(weight, 'Missing weight param');
   invariant(reps, 'Missing reps param');
 
-  // Convert weight to a number and validate it
   if (typeof weight === 'string' && typeof reps === 'string') {
     const weightNumber = parseFloat(weight);
     const repsNumber = parseFloat(reps);
     if (isNaN(weightNumber) || isNaN(repsNumber)) {
-      // Handle error: weight is not a valid number
       return { error: 'Invalid weight format.' };
     }
     const userId = 1; // Replace with actual user ID from session or authentication context
+
     try {
+      // Upsert workoutDefaults
       await db.workoutDefaults.upsert({
         where: { workoutId_userId: { workoutId: Number(workoutId), userId } },
         update: { weight: weightNumber, reps: repsNumber },
@@ -45,17 +46,25 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
           reps: repsNumber,
         },
       });
-      // If the upsert is successful, return a success message
-      return { success: 'Updated!' };
+
+      // Create a new WorkoutEntry
+      const workoutEntry = await db.workoutEntry.create({
+        data: {
+          userId,
+          workoutId: Number(workoutId),
+          weight: weightNumber,
+          reps: repsNumber,
+        },
+      });
+
+      // Return the id of the new WorkoutEntry
+      return { workoutEntryId: workoutEntry.id };
     } catch (error) {
-      // If there's an error, return an error message
-      // Log the error or handle it as needed
       console.error(error);
       return { error: 'An error occurred while updating.' };
     }
   } else {
-    // Handle the case where weight is not a string
-    return { error: 'Weight must be a string.' };
+    return { error: 'Weight and reps must be strings.' };
   }
 };
 
@@ -96,7 +105,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 export default function Workout() {
   const { workout, muscleGroup, defaultReps, defaultWeight } =
     useLoaderData<typeof loader>();
-  const { tweets, addTweet, clearTweets } = useTweets();
+  const { tweets, addTweet } = useTweets();
 
   console.log({ tweets });
   const actionData = useActionData<ActionData>();
@@ -104,7 +113,7 @@ export default function Workout() {
   // React.useEffect will run after the component mounts and whenever the actionData changes
   React.useEffect(() => {
     // If there's a success message, add a tweet
-    if (actionData?.success) {
+    if (actionData?.workoutEntryId) {
       addTweet('Workout captured!', 'Another workout in the books!');
     }
   }, [actionData, addTweet]); // Dependencies array ensures this effect is only re-run if actionData or addTweet changes
