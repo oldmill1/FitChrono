@@ -1,4 +1,4 @@
-.charms {
+.tweets {
   position: fixed;
   top: 1rem;
   left: 1rem;
@@ -6,7 +6,7 @@
   width: 411px;
   font-family: 'Source Code Pro', monospace;
 
-  .charm {
+  .tweet {
     display: flex;
     background: linear-gradient(to bottom, #ffffff, #f6f6f6); // Glossy look
     border: 1px solid #ddd; // Subtle border
@@ -14,14 +14,14 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Inner shadow for depth
     background: white;
 
-    .charm-col {
+    .tweet-col {
       display: flex;
       align-items: center;
       justify-content: center;
       &-a {
         flex: 0 0 auto;
         padding: 0.6rem;
-        .charm-icon {
+        .tweet-icon {
           display: flex;
           justify-content: center;
           align-items: center;

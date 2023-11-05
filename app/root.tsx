@@ -8,6 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
+import { TweetProvider } from '~/contexts/TweetProvider';
 import stylesHref from '~/styles/style.css';
 import resetCSS from '~/styles/reset.css';
 
@@ -32,7 +33,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <TweetProvider>
+          <Outlet />
+        </TweetProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

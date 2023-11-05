@@ -227,7 +227,7 @@ body {
   display: none;
 }
 
-.charms {
+.tweets {
   position: fixed;
   top: 1rem;
   left: 1rem;
@@ -235,7 +235,7 @@ body {
   width: 411px;
   font-family: "Source Code Pro", monospace;
 }
-.charms .charm {
+.tweets .tweet {
   display: flex;
   background: linear-gradient(to bottom, #ffffff, #f6f6f6);
   border: 1px solid #ddd;
@@ -243,16 +243,16 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   background: white;
 }
-.charms .charm .charm-col {
+.tweets .tweet .tweet-col {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.charms .charm .charm-col-a {
+.tweets .tweet .tweet-col-a {
   flex: 0 0 auto;
   padding: 0.6rem;
 }
-.charms .charm .charm-col-a .charm-icon {
+.tweets .tweet .tweet-col-a .tweet-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -263,21 +263,21 @@ body {
   font-size: 24px;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-.charms .charm .charm-col-b {
+.tweets .tweet .tweet-col-b {
   flex: 1;
   padding: 0.6rem;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
-.charms .charm .charm-col-b p:first-of-type {
+.tweets .tweet .tweet-col-b p:first-of-type {
   margin-top: 0;
   font-size: 1.3rem;
   font-weight: 600;
   padding: 0;
   color: black;
 }
-.charms .charm .charm-col-b p {
+.tweets .tweet .tweet-col-b p {
   padding: 0.5rem 0;
   color: slategrey;
   font-size: 1.1rem;

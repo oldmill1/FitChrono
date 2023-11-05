@@ -5,7 +5,8 @@ import { db } from '~/db.server';
 import StrengthBar from '~/components/StrengthBar';
 import TrackFit from '~/components/TrackFit';
 import invariant from 'tiny-invariant';
-import Charms from '~/components/Charms';
+import Tweets from '~/components/Tweets';
+import { useTweets } from '~/contexts/useTweets';
 
 type ActionData = {
   success?: string;
@@ -94,10 +95,12 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 export default function Workout() {
   const { workout, muscleGroup, defaultReps, defaultWeight } =
     useLoaderData<typeof loader>();
+  const { tweets, addTweet, clearTweets } = useTweets();
+  console.log({ tweets });
   const actionData = useActionData<ActionData>();
   return (
     <div>
-      <Charms message='Workout captured!' />
+      <Tweets message='Workout captured!' />
       <StrengthBar
         returnTo={`/muscleGroup/${muscleGroup.name}`}
         title={workout.displayName}
