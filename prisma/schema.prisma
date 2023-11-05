@@ -11,11 +11,12 @@ datasource db {
 }
 
 model User {
-  id              Int             @id @default(autoincrement())
-  email           String          @unique
+  id              Int               @id @default(autoincrement())
+  email           String            @unique
   password        String
   workoutLogs     WorkoutLog[]
   workoutDefaults WorkoutDefaults[]
+  WorkoutEntry    WorkoutEntry[]
 }
 
 model MuscleGroup {
@@ -26,22 +27,23 @@ model MuscleGroup {
 }
 
 model Workout {
-  id            Int             @id @default(autoincrement())
-  name          String
-  displayName   String
-  muscleGroupId Int
-  muscleGroup   MuscleGroup    @relation(fields: [muscleGroupId], references: [id])
-  workoutLogs   WorkoutLog[]
+  id              Int               @id @default(autoincrement())
+  name            String
+  displayName     String
+  muscleGroupId   Int
+  muscleGroup     MuscleGroup       @relation(fields: [muscleGroupId], references: [id])
+  workoutLogs     WorkoutLog[]
   workoutDefaults WorkoutDefaults[]
+  WorkoutEntry    WorkoutEntry[]
 }
 
 model WorkoutLog {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   workoutId Int
   userId    Int
   date      DateTime
-  workout   Workout @relation(fields: [workoutId], references: [id])
-  user      User    @relation(fields: [userId], references: [id])
+  workout   Workout  @relation(fields: [workoutId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model WorkoutDefaults {
@@ -54,4 +56,20 @@ model WorkoutDefaults {
   user      User    @relation(fields: [userId], references: [id])
 
   @@unique([userId, workoutId], name: "workoutId_userId")
+}
+
+model WorkoutEntry {
+  id        Int      @id @default(autoincrement())
+  userId    Int // Foreign key for the User model
+  workoutId Int // Foreign key for the Workout model
+  timestamp DateTime @default(now()) // Automatically set to the current date and time
+  weight    Float // The weight used during the workout
+  reps      Int // The number of repetitions performed
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id])
+  workout Workout @relation(fields: [workoutId], references: [id])
+
+  @@index([userId], name: "idx_workout_entry_user")
+  @@index([workoutId], name: "idx_workout_entry_workout")
 }
