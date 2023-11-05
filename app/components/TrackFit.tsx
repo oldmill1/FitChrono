@@ -6,7 +6,7 @@ import clickSound3 from '~/sounds/click3.mp3';
 
 import { useSubmit } from '@remix-run/react';
 
-export default function UpdateDefaults({
+export default function TrackFit({
   weight = 0,
   reps = 0,
   workoutId,

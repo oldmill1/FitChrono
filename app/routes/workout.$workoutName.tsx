@@ -3,8 +3,9 @@ import { json } from '@remix-run/node';
 import { useActionData, useLoaderData } from '@remix-run/react';
 import { db } from '~/db.server';
 import StrengthBar from '~/components/StrengthBar';
-import UpdateDefaults from '~/components/UpdateDefaults';
+import TrackFit from '~/components/TrackFit';
 import invariant from 'tiny-invariant';
+import Charms from '~/components/Charms';
 
 type ActionData = {
   success?: string;
@@ -90,19 +91,13 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   });
 };
 
-/**
- * This page will have 4 buttons to complete the workout
- * - "Set": Means complete 1 set of the Workout for `reps` at `weight`
- * - "Reps": Change the number of reps
- * - "Weight": Change the weight
- * @constructor
- */
 export default function Workout() {
   const { workout, muscleGroup, defaultReps, defaultWeight } =
     useLoaderData<typeof loader>();
   const actionData = useActionData<ActionData>();
   return (
     <div>
+      <Charms message='Workout captured!' />
       <StrengthBar
         returnTo={`/muscleGroup/${muscleGroup.name}`}
         title={workout.displayName}
@@ -116,7 +111,7 @@ export default function Workout() {
         ]}
       />
       <div className='workout-tracker'>
-        <UpdateDefaults
+        <TrackFit
           workoutId={workout.id}
           weight={defaultWeight}
           reps={defaultReps}
