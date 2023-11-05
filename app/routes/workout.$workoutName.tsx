@@ -1,3 +1,4 @@
+import React from 'react';
 import type { LoaderFunctionArgs } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import { useActionData, useLoaderData } from '@remix-run/react';
@@ -96,15 +97,24 @@ export default function Workout() {
   const { workout, muscleGroup, defaultReps, defaultWeight } =
     useLoaderData<typeof loader>();
   const { tweets, addTweet, clearTweets } = useTweets();
+
   console.log({ tweets });
   const actionData = useActionData<ActionData>();
+
+  // React.useEffect will run after the component mounts and whenever the actionData changes
+  React.useEffect(() => {
+    // If there's a success message, add a tweet
+    if (actionData?.success) {
+      addTweet('Workout captured!', 'Another workout in the books!');
+    }
+  }, [actionData, addTweet]); // Dependencies array ensures this effect is only re-run if actionData or addTweet changes
   return (
     <div>
-      <Tweets message='Workout captured!' />
+      {tweets && tweets.length > 0 && <Tweets tweets={tweets} />}
       <StrengthBar
         returnTo={`/muscleGroup/${muscleGroup.name}`}
         title={workout.displayName}
-        message={actionData?.success || actionData?.error}
+        message={actionData?.error}
         listItems={[
           {
             name: 'PR Weight',

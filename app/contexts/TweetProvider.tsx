@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useCallback, ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { TweetContext } from './TweetContext';
 import type { Tweet } from './TweetContext';
 
@@ -11,8 +12,8 @@ type TweetProviderProps = {
 export const TweetProvider: React.FC<TweetProviderProps> = ({ children }) => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
 
-  const addTweet = useCallback((text: string) => {
-    const newTweet: Tweet = { id: ++tweetId, text };
+  const addTweet = useCallback((text: string, message?: string) => {
+    const newTweet: Tweet = { id: ++tweetId, text, message };
     setTweets((prevTweets) => [...prevTweets, newTweet]);
   }, []);
 
