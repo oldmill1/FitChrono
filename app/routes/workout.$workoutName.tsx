@@ -47,8 +47,8 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
         },
       });
 
-      // Create a new WorkoutEntry
-      const workoutEntry = await db.workoutEntry.create({
+      // Create a new SetEntry
+      const setEntry = await db.setEntry.create({
         data: {
           userId,
           workoutId: Number(workoutId),
@@ -57,8 +57,8 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
         },
       });
 
-      // Return the id of the new WorkoutEntry
-      return { workoutEntryId: workoutEntry.id };
+      // Return the id of the new SetEntry
+      return { workoutEntryId: setEntry.id };
     } catch (error) {
       console.error(error);
       return { error: 'An error occurred while updating.' };

@@ -1,0 +1,27 @@
+.quad-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%; // This should ensure the container takes the full width
+
+  .quad-item {
+    flex-basis: 50%; // This should take up 50% of the width of the flex container
+    flex-grow: 1; // This allows the item to grow if necessary
+    height: 50vh; // Adjust the height as needed
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box; // Include padding and borders in the element's total width and height
+    padding: 1rem; // Optional padding
+    border: 1px solid #ccc; // Border for separation
+
+    // Remove the doubled-up borders
+    &:nth-of-type(odd) {
+      // A and C
+      border-right: none;
+    }
+    &:nth-of-type(-n + 2) {
+      // A and B
+      border-bottom: none;
+    }
+  }
+}

@@ -12,7 +12,7 @@ model User {
   email           String            @unique
   password        String
   workoutDefaults WorkoutDefaults[]
-  WorkoutEntry    WorkoutEntry[]
+  SetEntry    SetEntry[]
 }
 
 model MuscleGroup {
@@ -29,7 +29,7 @@ model Workout {
   muscleGroupId   Int
   muscleGroup     MuscleGroup       @relation(fields: [muscleGroupId], references: [id])
   workoutDefaults WorkoutDefaults[]
-  WorkoutEntry    WorkoutEntry[]
+  SetEntry    SetEntry[]
 }
 
 model WorkoutDefaults {
@@ -44,7 +44,7 @@ model WorkoutDefaults {
   @@unique([userId, workoutId], name: "workoutId_userId")
 }
 
-model WorkoutEntry {
+model SetEntry {
   id        Int      @id @default(autoincrement())
   userId    Int // Foreign key for the User model
   workoutId Int // Foreign key for the Workout model
@@ -56,6 +56,6 @@ model WorkoutEntry {
   user    User    @relation(fields: [userId], references: [id])
   workout Workout @relation(fields: [workoutId], references: [id])
 
-  @@index([userId], name: "idx_workout_entry_user")
-  @@index([workoutId], name: "idx_workout_entry_workout")
+  @@index([userId], name: "idx_set_entry_user")
+  @@index([workoutId], name: "idx_set_entry_workout")
 }
