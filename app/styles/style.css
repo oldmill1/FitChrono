@@ -283,6 +283,18 @@ body {
   font-size: 1.1rem;
 }
 
+@keyframes puffUp {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+.puff-up {
+  animation: puffUp 0.5s ease forwards;
+}
+
 .quad-container {
   display: flex;
   flex-wrap: wrap;
@@ -304,6 +316,57 @@ body {
 }
 .quad-container .quad-item:nth-of-type(-n + 2) {
   border-bottom: none;
+}
+.quad-container .quad-item .glossy-circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px -2px #333;
+  text-shadow: 0px -1px #333;
+  position: relative;
+  overflow: hidden;
+  padding: 15px 25px;
+  background-color: green; /*for compatibility with older browsers*/
+  background-image: linear-gradient(green, lightgreen);
+  /* text styles */
+  text-decoration: none;
+  color: #fff;
+  font-size: 25px;
+  font-family: sans-serif;
+  font-weight: 100;
+  cursor: pointer;
+}
+.quad-container .quad-item .glossy-circle:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: calc(100% - 4px);
+  height: 50%;
+  background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+}
+.quad-container .quad-item .glossy-circle:active {
+  box-shadow: 0 1px 2px -2px #333 inset;
+  transform: translateY(2px);
+}
+.quad-container .quad-item .glossy-circle:hover {
+  background: linear-gradient(#073, #0fa);
+}
+.quad-container .quad-item .glossy-circle .number {
+  font-size: 5em;
+  color: #333;
+  z-index: 1;
+}
+.quad-container .quad-item .glossy-circle .label {
+  font-size: 1em;
+  color: #333;
+  position: absolute;
+  bottom: 10px;
+  z-index: 1;
 }
 
 .grid-container {

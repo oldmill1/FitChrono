@@ -58,7 +58,7 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
       });
 
       // Return the id of the new SetEntry
-      return { workoutEntryId: setEntry.id };
+      return json({ workoutEntryId: setEntry.id });
     } catch (error) {
       console.error(error);
       return { error: 'An error occurred while updating.' };
@@ -109,7 +109,6 @@ export default function Workout() {
 
   console.log({ tweets });
   const actionData = useActionData<ActionData>();
-
   // React.useEffect will run after the component mounts and whenever the actionData changes
   React.useEffect(() => {
     // If there's a success message, add a tweet
