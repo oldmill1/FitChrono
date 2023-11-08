@@ -10,33 +10,25 @@ import classNames from 'classnames';
 export const loader: LoaderFunction = async ({ params }) => {
   invariant(params.id, 'Missing id param');
   const setEntryId = parseInt(params.id, 10);
+  console.log({ setEntryId });
 
-  try {
-    if (isNaN(setEntryId)) {
-      return new Response('Invalid ID', { status: 400 });
-    }
+  const setEntry = await db.setEntry.findUnique({
+    where: { id: setEntryId },
+  });
 
-    const setEntry = await db.setEntry.findUnique({
-      where: { id: setEntryId },
-    });
-
-    if (!setEntry) {
-      return new Response('Not Found', { status: 404 });
-    }
-
-    const workout = await db.workout.findUnique({
-      where: { id: setEntry.workoutId },
-    });
-
-    if (!workout) {
-      return new Response('Workout Not Found', { status: 404 });
-    }
-
-    return json({ setEntry, workout });
-  } catch (error) {
-    // Handle any other errors that might occur during database access
-    throw new Response('Internal Server Error', { status: 500 });
+  if (!setEntry) {
+    throw new Response('Not Found', { status: 404 });
   }
+
+  const workout = await db.workout.findUnique({
+    where: { id: setEntry.workoutId },
+  });
+
+  if (!workout) {
+    throw new Response('Workout Not Found', { status: 404 });
+  }
+
+  return json({ setEntry, workout });
 };
 
 const useTicker = (end: number, duration = 1000, onEnd?: () => void) => {
@@ -73,7 +65,6 @@ export default function Workout() {
   }, []); // Dependencies array is empty, meaning this callback only gets created once
 
   const reps = useTicker(setEntry.reps, 1000, onEnd);
-
   const weight = useTicker(setEntry.weight, 1000, onEnd);
 
   return (
