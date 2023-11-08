@@ -12,7 +12,7 @@ import { useTweets } from '~/contexts/useTweets';
 type ActionData = {
   success?: string;
   error?: string;
-  workoutEntryId?: string;
+  setId?: string;
 };
 
 export const action = async ({ params, request }: LoaderFunctionArgs) => {
@@ -57,8 +57,10 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
         },
       });
 
+      console.log('hello', setEntry.id);
+
       // Return the id of the new SetEntry
-      return json({ workoutEntryId: setEntry.id });
+      return json({ setId: setEntry.id });
     } catch (error) {
       console.error(error);
       return { error: 'An error occurred while updating.' };
@@ -107,13 +109,17 @@ export default function Workout() {
     useLoaderData<typeof loader>();
   const { tweets, addTweet } = useTweets();
 
-  console.log({ tweets });
   const actionData = useActionData<ActionData>();
   // React.useEffect will run after the component mounts and whenever the actionData changes
   React.useEffect(() => {
     // If there's a success message, add a tweet
-    if (actionData?.workoutEntryId) {
-      addTweet('Workout captured!', 'Another workout in the books!');
+    if (actionData?.setId) {
+      addTweet({
+        text: 'Workout captured!',
+        message: 'Another workout in the books!',
+        payload: actionData.setId,
+        resource: 'set',
+      });
     }
   }, [actionData, addTweet]); // Dependencies array ensures this effect is only re-run if actionData or addTweet changes
   return (

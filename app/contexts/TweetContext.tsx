@@ -3,11 +3,22 @@ export type Tweet = {
   id: number;
   text: string;
   message?: string;
+  payload?: string;
+  resource?: string;
 };
 
 export type TweetContextType = {
   tweets: Tweet[];
-  addTweet: (text: string, message?: string) => void;
+  addTweet: ({
+    text,
+    message,
+    payload,
+  }: {
+    text: string;
+    message?: string;
+    payload?: string;
+    resource?: string;
+  }) => void;
   clearTweets: () => void;
 };
 

@@ -12,10 +12,29 @@ type TweetProviderProps = {
 export const TweetProvider: React.FC<TweetProviderProps> = ({ children }) => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
 
-  const addTweet = useCallback((text: string, message?: string) => {
-    const newTweet: Tweet = { id: ++tweetId, text, message };
-    setTweets((prevTweets) => [...prevTweets, newTweet]);
-  }, []);
+  const addTweet = useCallback(
+    ({
+      text,
+      message,
+      payload,
+      resource,
+    }: {
+      text: string;
+      message?: string;
+      payload?: string;
+      resource?: string;
+    }) => {
+      const newTweet: Tweet = {
+        id: ++tweetId,
+        text,
+        message,
+        payload,
+        resource,
+      };
+      setTweets((prevTweets) => [...prevTweets, newTweet]);
+    },
+    [],
+  );
 
   const clearTweets = useCallback(() => {
     setTweets([]);

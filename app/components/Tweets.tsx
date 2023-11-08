@@ -1,6 +1,8 @@
 import type { Tweet } from '~/contexts/TweetContext';
+import { Link } from '@remix-run/react';
 
 const Tweets = ({ tweets }: { tweets: Tweet[] }) => {
+  console.log({ tweets });
   return (
     <div className='tweets'>
       {tweets &&
@@ -13,6 +15,11 @@ const Tweets = ({ tweets }: { tweets: Tweet[] }) => {
             <div className='tweet-col tweet-col-b'>
               <p>{tweet.text}</p>
               {tweet.message && <p>{tweet.message}</p>}
+              {tweet.payload && tweet.resource && (
+                <Link to={`/${tweet.resource}/${tweet.payload}`}>
+                  Click bubble to check it out
+                </Link>
+              )}
             </div>
           </div>
         ))}

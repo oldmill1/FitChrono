@@ -10,14 +10,18 @@ import classNames from 'classnames';
 export const loader: LoaderFunction = async ({ params }) => {
   invariant(params.id, 'Missing id param');
   const setEntryId = parseInt(params.id, 10);
-  console.log({ setEntryId });
+
+  // Make sure params.id is a number, return 500 otherwise
+  if (isNaN(setEntryId)) {
+    throw new Response('Invalid Set Entry ID', { status: 500 });
+  }
 
   const setEntry = await db.setEntry.findUnique({
     where: { id: setEntryId },
   });
 
   if (!setEntry) {
-    throw new Response('Not Found', { status: 404 });
+    throw new Response('Set Entry Not Found', { status: 404 });
   }
 
   const workout = await db.workout.findUnique({
