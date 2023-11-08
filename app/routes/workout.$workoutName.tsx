@@ -48,6 +48,14 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
       });
 
       // Create a new SetEntry
+      // Look for an env variable called IS_LOCAL
+      // if it's true, don't create a setEntry in the database, just return the id 1
+      // otherwise, create a new setEntry in the database
+      if (process.env.IS_LOCAL) {
+        console.log('IS_LOCAL is true, not creating a setEntry');
+        return json({ setId: 1 });
+      }
+
       const setEntry = await db.setEntry.create({
         data: {
           userId,
@@ -56,8 +64,6 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
           reps: repsNumber,
         },
       });
-
-      console.log('hello', setEntry.id);
 
       // Return the id of the new SetEntry
       return json({ setId: setEntry.id });
