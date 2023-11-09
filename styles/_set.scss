@@ -27,6 +27,7 @@
     box-sizing: border-box; // Include padding and borders in the element's total width and height
     padding: 1rem; // Optional padding
     border: 1px solid #ccc; // Border for separation
+    position: relative; // relatively position to allow for absolute positioning of the circle
 
     // Remove the doubled-up borders
     &:nth-of-type(odd) {
@@ -36,6 +37,67 @@
     &:nth-of-type(-n + 2) {
       // A and B
       border-bottom: none;
+    }
+
+    .badge {
+      position: absolute;
+      right: 60px; // Position as needed
+      top: 90px; // Position as needed
+      background-color: #007aff; // Apple's blue color
+      color: white;
+      border-radius: 50%;
+      width: 50px; // Adjust size as needed
+      height: 50px; // Adjust size as needed
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Helvetica, Arial, sans-serif;
+      font-size: 1em; // Adjust as needed
+      font-weight: 600; // Medium to bold font weight
+      text-align: center;
+      line-height: 50px; // Center text vertically
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); // Smooth shadow
+      border: 2px solid #fff; // Optional: adds a border for more definition
+
+      // Smooth gradient background
+      background-image: linear-gradient(to bottom, #007aff, #0051a8);
+
+      // Inner shadow for inset effect (optional)
+      &:after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        bottom: -2px;
+        left: -2px;
+        border-radius: inherit; // Keep the rounded edges
+        z-index: -1;
+        background: rgba(255, 255, 255, 0.1);
+        background: radial-gradient(
+          circle at top right,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+      }
+
+      // Subtle outer glow (optional)
+      &:before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        left: -1px;
+        border-radius: inherit; // Keep the rounded edges
+        z-index: -2;
+        background: rgba(255, 255, 255, 0.1);
+        background: radial-gradient(
+          circle at bottom left,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+      }
     }
 
     .glossy-circle {
