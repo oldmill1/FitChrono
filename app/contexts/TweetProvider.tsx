@@ -18,11 +18,13 @@ export const TweetProvider: React.FC<TweetProviderProps> = ({ children }) => {
       message,
       payload,
       resource,
+      coins = '0',
     }: {
       text: string;
       message?: string;
       payload?: string;
       resource?: string;
+      coins?: string;
     }) => {
       const newTweet: Tweet = {
         id: ++tweetId,
@@ -30,6 +32,7 @@ export const TweetProvider: React.FC<TweetProviderProps> = ({ children }) => {
         message,
         payload,
         resource,
+        coins,
       };
       setTweets((prevTweets) => [...prevTweets, newTweet]);
     },

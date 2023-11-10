@@ -5,6 +5,7 @@ export type Tweet = {
   message?: string;
   payload?: string;
   resource?: string;
+  coins?: string;
 };
 
 export type TweetContextType = {
@@ -13,11 +14,13 @@ export type TweetContextType = {
     text,
     message,
     payload,
+    coins,
   }: {
     text: string;
     message?: string;
     payload?: string;
     resource?: string;
+    coins?: string;
   }) => void;
   clearTweets: () => void;
 };

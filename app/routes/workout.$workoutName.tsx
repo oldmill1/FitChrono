@@ -13,18 +13,57 @@ type ActionData = {
   success?: string;
   error?: string;
   setId?: string;
+  coins?: string;
 };
+
+function calculateCoins(
+  repsNumber: number,
+  weightNumber: number,
+  recentSetsCount: string,
+  prWeight: string,
+): number {
+  let coins = 30; // Base points for completing a workout set
+
+  // Additional coins for more than 8 reps
+  if (repsNumber > 8) {
+    coins += 10;
+  }
+
+  // Coins based on weight
+  coins += Math.floor(weightNumber / 10) * 10;
+
+  // Bonus coins for recent sets
+  coins += Number(recentSetsCount) * 10;
+
+  // TODO: Pyramid sets = flat 200 coins bonus
+  // TODO: Add points for hitting a PR
+  // TODO: Add points if you did the same workout in the past 7 days (not including today)
+
+  // Bonus for setting a new PR
+  if (weightNumber > Number(prWeight)) {
+    coins += 100;
+  }
+
+  return coins;
+}
 
 export const action = async ({ params, request }: LoaderFunctionArgs) => {
   const formData = await request.formData();
   const weight = formData.get('weight');
   const reps = formData.get('reps');
   const workoutId = formData.get('workoutId');
+  const recentSetsCount = formData.get('recentSetsCount');
+  const prWeight = formData.get('prWeight');
 
   invariant(params.workoutName, 'Missing workoutName param');
   invariant(workoutId, 'Missing workoutId param');
   invariant(weight, 'Missing weight param');
   invariant(reps, 'Missing reps param');
+  invariant(
+    typeof recentSetsCount === 'string',
+    'recentSetsCount must be a string',
+  );
+  invariant(typeof prWeight === 'string', 'prWeight must be a string');
 
   if (typeof weight === 'string' && typeof reps === 'string') {
     const weightNumber = parseFloat(weight);
@@ -47,14 +86,23 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
         },
       });
 
+      // Generate points for this workout set
+      const coins = calculateCoins(
+        repsNumber,
+        weightNumber,
+        recentSetsCount,
+        prWeight,
+      );
+      console.log({ coins });
+
       // Create a new SetEntry
       // Look for an env variable called IS_LOCAL
       // if it's true, don't create a setEntry in the database, just return the id 1
       // otherwise, create a new setEntry in the database
-      // if (process.env.IS_LOCAL) {
-      //   console.log('IS_LOCAL is true, not creating a setEntry');
-      //   return json({ setId: 1 });
-      // }
+      if (process.env.IS_LOCAL) {
+        console.log('IS_LOCAL is true, not creating a setEntry');
+        return json({ setId: 1, coins });
+      }
 
       const setEntry = await db.setEntry.create({
         data: {
@@ -62,11 +110,12 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
           workoutId: Number(workoutId),
           weight: weightNumber,
           reps: repsNumber,
+          coins,
         },
       });
 
       // Return the id of the new SetEntry
-      return json({ setId: setEntry.id });
+      return json({ setId: setEntry.id, coins });
     } catch (error) {
       console.error(error);
       return { error: 'An error occurred while updating.' };
@@ -99,20 +148,51 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
       workoutId: workout.id,
     },
   });
-  if (!workoutDefaults) {
-    return json({ workout, muscleGroup, defaultReps: 0, defaultWeight: 0 });
-  }
+  // Count all the SetEntries for this workout that were created in the last 15 minutes by user 1
+  // get the count only
+  // for 15 minutes ago, use new Date(Date.now() - 15 * 60 * 1000)
+  // for 7 days ago, use new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+  const recentSetsCount = await db.setEntry.count({
+    where: {
+      workoutId: workout.id,
+      userId: 1,
+      timestamp: {
+        gt: new Date(Date.now() - 15 * 60 * 1000),
+      },
+    },
+  });
+
+  // Calculate the PR
+  const prWeight = await db.setEntry.findFirst({
+    where: {
+      workoutId: workout.id,
+      userId: 1,
+    },
+    orderBy: {
+      weight: 'desc',
+    },
+    take: 1,
+  });
+
   return json({
     workout,
     muscleGroup,
-    defaultReps: workoutDefaults.reps,
-    defaultWeight: workoutDefaults.weight,
+    defaultReps: workoutDefaults ? workoutDefaults.reps : 0,
+    defaultWeight: workoutDefaults ? workoutDefaults.weight : 0,
+    prWeight: prWeight ? prWeight.weight : 0, // Top weight will be 0 if there are no records
+    recentSetsCount,
   });
 };
 
 export default function Workout() {
-  const { workout, muscleGroup, defaultReps, defaultWeight } =
-    useLoaderData<typeof loader>();
+  const {
+    workout,
+    muscleGroup,
+    defaultReps,
+    defaultWeight,
+    recentSetsCount,
+    prWeight,
+  } = useLoaderData<typeof loader>();
   const { tweets, addTweet } = useTweets();
 
   const actionData = useActionData<ActionData>();
@@ -125,6 +205,7 @@ export default function Workout() {
         message: 'Another workout in the books!',
         payload: actionData.setId,
         resource: 'set',
+        coins: actionData.coins,
       });
     }
   }, [actionData, addTweet]); // Dependencies array ensures this effect is only re-run if actionData or addTweet changes
@@ -148,6 +229,8 @@ export default function Workout() {
           workoutId={workout.id}
           weight={defaultWeight}
           reps={defaultReps}
+          recentSetsCount={recentSetsCount}
+          prWeight={prWeight}
         />
       </div>
     </div>

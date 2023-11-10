@@ -51,6 +51,21 @@ Visit `http://localhost:3000` in your browser to access the application.
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
+## The Coins System 1.0
+
+- Completing a workout set gives you 30 coins. 
+
+**You can gain an advantage by scoring bonus coins.**
+
+- If you complete 8 reps of ANY workout, you get 10 coins bonus.
+- Every 10lbs you lift gives you 10 bonus coins.
+
+- Count all the sets of the same workout you did in the last 15 minutes,
+and take 10 bonus coins for every set. (Eg, doing 3 dips in the last
+15 minutes = 30 coins.)
+
+- Pyramid sets = flat 200 coins bonus.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

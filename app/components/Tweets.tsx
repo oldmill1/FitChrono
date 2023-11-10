@@ -15,9 +15,10 @@ const Tweets = ({ tweets }: { tweets: Tweet[] }) => {
             <div className='tweet-col tweet-col-b'>
               <p>{tweet.text}</p>
               {tweet.message && <p>{tweet.message}</p>}
+              <p>You received {tweet.coins} coins.</p>
               {tweet.payload && tweet.resource && (
                 <Link to={`/${tweet.resource}/${tweet.payload}`}>
-                  Click bubble to check it out
+                  Click here to check it out
                 </Link>
               )}
             </div>

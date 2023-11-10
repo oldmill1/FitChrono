@@ -10,10 +10,14 @@ export default function TrackFit({
   weight = 0,
   reps = 0,
   workoutId,
+  recentSetsCount = 0,
+  prWeight = 0,
 }: {
   weight?: number;
   workoutId: number;
   reps?: number;
+  recentSetsCount?: number;
+  prWeight?: number;
 }) {
   const [repsInput, setRepsInput] = useState('0');
   const [weightInput, setWeightInput] = useState('0');
@@ -27,6 +31,8 @@ export default function TrackFit({
     weight: 'overwrite',
   });
   const submit = useSubmit();
+
+  console.log({ prWeight });
 
   const playClickSound = async (soundId: string) => {
     let soundToPlay;
@@ -156,6 +162,8 @@ export default function TrackFit({
       formData.append('weight', weightNumber.toString());
       formData.append('reps', repsNumber.toString());
       formData.append('workoutId', workoutId.toString());
+      formData.append('prWeight', prWeight.toString());
+      formData.append('recentSetsCount', recentSetsCount.toString());
       submit(formData, { method: 'post' });
     }
   }

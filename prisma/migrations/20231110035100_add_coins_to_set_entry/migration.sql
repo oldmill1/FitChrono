@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "SetEntry" ADD COLUMN     "coins" INTEGER NOT NULL DEFAULT 10;

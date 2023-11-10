@@ -51,6 +51,7 @@ model SetEntry {
   timestamp DateTime @default(now()) // Automatically set to the current date and time
   weight    Float // The weight used during the workout
   reps      Int // The number of repetitions performed
+  coins     Int @default(10)
 
   // Relations
   user    User    @relation(fields: [userId], references: [id])
