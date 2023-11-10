@@ -32,8 +32,6 @@ export default function TrackFit({
   });
   const submit = useSubmit();
 
-  console.log({ prWeight });
-
   const playClickSound = async (soundId: string) => {
     let soundToPlay;
     switch (soundId) {

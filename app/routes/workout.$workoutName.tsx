@@ -16,24 +16,31 @@ type ActionData = {
   coins?: string;
 };
 
-function calculateCoins(
+function payout(
   repsNumber: number,
   weightNumber: number,
   recentSetsCount: string,
   prWeight: string,
 ): number {
-  let coins = 30; // Base points for completing a workout set
+  let log = '';
+  let coins = 3; // Base points for completing a workout set
+  log += 'Base points: 3\n';
 
   // Additional coins for more than 8 reps
   if (repsNumber > 8) {
-    coins += 10;
+    coins += 1;
+    log += 'Extra points for more than 8 reps: 1\n';
   }
 
   // Coins based on weight
-  coins += Math.floor(weightNumber / 10) * 10;
+  let weightPoints = Math.floor(weightNumber / 10);
+  coins += weightPoints;
+  log += `Points based on weight (${weightNumber}): ${weightPoints}\n`;
 
   // Bonus coins for recent sets
-  coins += Number(recentSetsCount) * 10;
+  let recentSetPoints = Number(recentSetsCount);
+  coins += recentSetPoints;
+  log += `Bonus points for recent sets (${recentSetsCount}): ${recentSetPoints}\n`;
 
   // TODO: Pyramid sets = flat 200 coins bonus
   // TODO: Add points for hitting a PR
@@ -41,9 +48,11 @@ function calculateCoins(
 
   // Bonus for setting a new PR
   if (weightNumber > Number(prWeight)) {
-    coins += 100;
+    coins += 10;
+    log += 'It was a PR - got extra 10 points\n';
   }
 
+  console.log(log);
   return coins;
 }
 
@@ -87,22 +96,16 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
       });
 
       // Generate points for this workout set
-      const coins = calculateCoins(
-        repsNumber,
-        weightNumber,
-        recentSetsCount,
-        prWeight,
-      );
-      console.log({ coins });
+      const coins = payout(repsNumber, weightNumber, recentSetsCount, prWeight);
 
       // Create a new SetEntry
       // Look for an env variable called IS_LOCAL
       // if it's true, don't create a setEntry in the database, just return the id 1
       // otherwise, create a new setEntry in the database
-      if (process.env.IS_LOCAL) {
-        console.log('IS_LOCAL is true, not creating a setEntry');
-        return json({ setId: 1, coins });
-      }
+      // if (process.env.IS_LOCAL) {
+      //   console.log('IS_LOCAL is true, not creating a setEntry');
+      //   return json({ setId: 23, coins });
+      // }
 
       const setEntry = await db.setEntry.create({
         data: {
@@ -177,7 +180,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   return json({
     workout,
     muscleGroup,
-    defaultReps: workoutDefaults ? workoutDefaults.reps : 0,
+    defaultReps: workoutDefaults ? workoutDefaults.reps : 0, // TODO: maybe change this?
     defaultWeight: workoutDefaults ? workoutDefaults.weight : 0,
     prWeight: prWeight ? prWeight.weight : 0, // Top weight will be 0 if there are no records
     recentSetsCount,
@@ -220,7 +223,7 @@ export default function Workout() {
           {
             name: 'PR Weight',
             httpEntity: <span>&#128170;</span>,
-            itemValue: 0,
+            itemValue: prWeight,
           },
         ]}
       />
