@@ -10,7 +10,8 @@
     display: flex;
     background: linear-gradient(to bottom, #ffffff, #f6f6f6); // Glossy look
     border: 1px solid #ddd; // Subtle border
-    border-radius: 12px; // Curved edges
+    // Curved edges
+    border-radius: 0 0 12px 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Inner shadow for depth
     background: white;
 
@@ -56,5 +57,66 @@
         }
       }
     }
+  }
+}
+
+@mixin backdrop-filter($filter) {
+  -webkit-backdrop-filter: $filter;
+  backdrop-filter: $filter;
+}
+
+.aqua-titlebar {
+  background-color: rgba(255, 255, 255, 0.7);
+  @include backdrop-filter(blur(10px));
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+  border-radius: 12px 12px 0 0;
+
+  .titlebar-buttons {
+    margin-right: 8px;
+
+    span {
+      height: 16px; // Increased size
+      width: 16px; // Increased size
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px; // Adjusted spacing
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Added drop shadow
+      position: relative;
+      overflow: hidden;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      &.close-button {
+        background-color: #ff605c;
+      }
+
+      &.minimize-button {
+        background-color: #ffbd44;
+      }
+
+      &.maximize-button {
+        background-color: #00ca56;
+      }
+    }
+  }
+
+  .title {
+    flex-grow: 1;
+    text-align: center;
   }
 }

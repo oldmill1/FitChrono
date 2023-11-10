@@ -239,7 +239,7 @@ body {
   display: flex;
   background: linear-gradient(to bottom, #ffffff, #f6f6f6);
   border: 1px solid #ddd;
-  border-radius: 12px;
+  border-radius: 0 0 12px 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   background: white;
 }
@@ -281,6 +281,56 @@ body {
   padding: 0.5rem 0;
   color: slategrey;
   font-size: 1.1rem;
+}
+
+.aqua-titlebar {
+  background-color: rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+  border-radius: 12px 12px 0 0;
+}
+.aqua-titlebar .titlebar-buttons {
+  margin-right: 8px;
+}
+.aqua-titlebar .titlebar-buttons span {
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+.aqua-titlebar .titlebar-buttons span:after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  z-index: 1;
+}
+.aqua-titlebar .titlebar-buttons span.close-button {
+  background-color: #ff605c;
+}
+.aqua-titlebar .titlebar-buttons span.minimize-button {
+  background-color: #ffbd44;
+}
+.aqua-titlebar .titlebar-buttons span.maximize-button {
+  background-color: #00ca56;
+}
+.aqua-titlebar .title {
+  flex-grow: 1;
+  text-align: center;
 }
 
 @keyframes puffUp {
