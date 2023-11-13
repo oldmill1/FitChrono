@@ -1,5 +1,5 @@
 body {
-  background: #1c262a;
+  background: black;
 }
 
 @import 'strengthBar';
@@ -19,5 +19,99 @@ body {
     padding: 0;
     font-size: 24px;
     color: white;
+  }
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; // 100% of the viewport height
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 1px solid slategrey; // Slight border for a modern look
+    font-family: 'Nabla', sans-serif;
+    background: none;
+    z-index: 999;
+
+    .title {
+      font-size: 24px;
+      color: #333;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .coins-meter {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      background: #191c26;
+      padding: 3px 13px;
+      border-radius: 21px;
+      border: 1px solid #162330;
+
+      .coin-graphic {
+        margin-right: 5px;
+      }
+
+      .coin-count {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    height: 100%; // Adjust as needed
+    background-size: cover; // Ensures the background image covers the entire div
+    background-position: center; // Centers the background image
+    flex-grow: 1; // Ensures the content div takes up all remaining space
+    background-image: url('/images/body_torso_mobile.png');
+    margin-top: -91px;
+
+    .clouds {
+      top: 200px;
+      left: 100px;
+      position: fixed;
+
+      .cloud {
+        height: 100px;
+        width: 200px;
+        background: #acdec7;
+        border-radius: 40px;
+        display: flex;
+        justify-content: center;
+        box-shadow:
+          rgba(0, 0, 0, 0.16) 0 1px 4px,
+          rgba(51, 51, 51, 0.6) 0 0 0 3px;
+        font-family: 'DotGothic16', sans-serif;
+        color: #8FD1C9;
+        // vertically center the span
+        align-items: center;
+
+        span {
+          color: black;
+          z-index: 999;
+          font-size: 1.8rem;
+        }
+
+        &:after {
+          content: '';
+          width: 200px;
+          height: 80px;
+          background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0) 100%
+          );
+          border-radius: 40px;
+          position: absolute;
+          top: 0;
+        }
+      }
+    }
   }
 }

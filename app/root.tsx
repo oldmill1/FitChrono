@@ -15,10 +15,10 @@ import resetCSS from '~/styles/reset.css';
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: resetCSS },
   { rel: 'stylesheet', href: stylesHref },
-  // Google fonts: Press Start 2P, Source Code Pro, VT323
+  // Google Font for Nabla, Source Code Pro
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Source+Code+Pro:ital,wght@0,600;0,900;1,300;1,400;1,700&family=VT323&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Nabla&family=DotGothic16&family=Source+Code+Pro:ital,wght@0,600;0,900;1,300;1,400;1,700&display=swap',
   },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ];
