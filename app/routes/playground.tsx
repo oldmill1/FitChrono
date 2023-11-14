@@ -1,6 +1,6 @@
 export default function Playground() {
   return (
-    <div id='container'>
+    <div className='container'>
       <div className='header'>
         <h1 className='title'>Barbell Swami</h1>
         <div className='coins-meter'>
