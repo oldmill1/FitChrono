@@ -1,16 +1,19 @@
 import type { MetaFunction } from '@remix-run/node';
-import { json } from '@remix-run/node'; // or cloudflare/deno
+import { json } from '@remix-run/node';
 import { NavLink, useLoaderData } from '@remix-run/react';
 import { db } from '~/db.server';
 import Header from '~/components/Header';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'You are awesome!' },
-    { name: 'description', content: 'The hype is real' },
+    { title: 'Barbell Swami - Get strong and health' },
+    {
+      name: 'description',
+      content:
+        'Intelligent workout tracking and planning for people who lift weights',
+    },
   ];
 };
-
 export const loader = async () => {
   // return all the MuscleGroup records
   const muscleGroups = await db.muscleGroup.findMany();
@@ -22,16 +25,21 @@ export default function Index() {
   return (
     <div className='container'>
       {title && typeof title === 'string' && <Header title={title} />}
-      <div className='grid-container'>
-        {muscleGroups.map((muscleGroup) => (
-          <NavLink
-            key={muscleGroup.id}
-            className='grid-item'
-            to={`/muscleGroup/${muscleGroup.name}`}
-          >
-            <div>{muscleGroup.name}</div>
-          </NavLink>
-        ))}
+      <div className='content'>
+        <div className='clouds'>
+          {muscleGroups.map((muscleGroup) => (
+            <NavLink
+              key={muscleGroup.id}
+              data-testid={`cloud-${muscleGroup.name}`}
+              className='cloud'
+              to={`/muscleGroup/${muscleGroup.name}`}
+            >
+              <div>
+                <span>{muscleGroup.name}</span>
+              </div>
+            </NavLink>
+          ))}
+        </div>
       </div>
     </div>
   );

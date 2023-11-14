@@ -525,31 +525,61 @@ body {
   margin-top: -91px;
 }
 .container .content .clouds {
-  top: 200px;
-  left: 100px;
-  position: fixed;
+  position: relative;
+}
+.container .content .clouds .cloud[data-testid=cloud-Chest] {
+  top: 251px;
+  left: 170px;
+}
+.container .content .clouds .cloud[data-testid=cloud-Back] {
+  top: 141px;
+  left: 9px;
+}
+.container .content .clouds .cloud[data-testid=cloud-Core] {
+  top: 341px;
+  left: 170px;
+}
+.container .content .clouds .cloud[data-testid=cloud-Legs] {
+  top: 541px;
+  left: 101px;
+}
+.container .content .clouds .cloud[data-testid=cloud-Shoulders] {
+  top: 211px;
+  left: 9px;
+}
+.container .content .clouds .cloud[data-testid=cloud-Arms] {
+  top: 351px;
+  left: 9px;
 }
 .container .content .clouds .cloud {
-  height: 80px;
-  width: 200px;
+  height: 40px;
+  width: 161px;
   background: #acdec7;
   border-radius: 40px;
   display: flex;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px, rgba(51, 51, 51, 0.6) 0 0 0 3px;
   font-family: "DotGothic16", sans-serif;
-  color: #8fd1c9;
   align-items: center;
+  position: fixed;
+  cursor: pointer;
+  color: #224E58;
+  font-size: 1.8rem;
+  text-decoration: none;
 }
 .container .content .clouds .cloud span {
-  color: black;
   z-index: 999;
-  font-size: 1.8rem;
+  position: relative;
+}
+.container .content .clouds .cloud:hover {
+  background: #8fd1c9;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
 }
 .container .content .clouds .cloud:after {
   content: "";
-  width: 200px;
-  height: 80px;
+  width: 158px;
+  height: 40px;
   background: linear-gradient(to bottom, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 100%);
   border-radius: 40px;
   position: absolute;
