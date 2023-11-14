@@ -40,7 +40,6 @@ export default function MuscleGroup() {
   const { workouts } = muscleGroup;
   return (
     <div>
-      <StrengthBar title={muscleGroup.name} returnTo={'/'} />
       <div className='grid-container'>
         {workouts.map((workout) => (
           <NavLink
