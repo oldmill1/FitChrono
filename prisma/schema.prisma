@@ -12,7 +12,8 @@ model User {
   email           String            @unique
   password        String
   workoutDefaults WorkoutDefaults[]
-  SetEntry    SetEntry[]
+  SetEntry        SetEntry[]
+  UserCoins       UserCoins?
 }
 
 model MuscleGroup {
@@ -29,7 +30,7 @@ model Workout {
   muscleGroupId   Int
   muscleGroup     MuscleGroup       @relation(fields: [muscleGroupId], references: [id])
   workoutDefaults WorkoutDefaults[]
-  SetEntry    SetEntry[]
+  SetEntry        SetEntry[]
 }
 
 model WorkoutDefaults {
@@ -51,7 +52,7 @@ model SetEntry {
   timestamp DateTime @default(now()) // Automatically set to the current date and time
   weight    Float // The weight used during the workout
   reps      Int // The number of repetitions performed
-  coins     Int @default(10)
+  coins     Int      @default(10)
 
   // Relations
   user    User    @relation(fields: [userId], references: [id])
@@ -59,4 +60,13 @@ model SetEntry {
 
   @@index([userId], name: "idx_set_entry_user")
   @@index([workoutId], name: "idx_set_entry_workout")
+}
+
+model UserCoins {
+  user_id Int @unique
+  coins   Int @default(0)
+
+  user User @relation(fields: [user_id], references: [id])
+
+  @@index([user_id], name: "idx_user_coins")
 }

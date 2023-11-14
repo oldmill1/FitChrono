@@ -74,6 +74,28 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
   );
   invariant(typeof prWeight === 'string', 'prWeight must be a string');
 
+  const upsertUserCoins = async (userId: number, coins: number) => {
+    try {
+      await db.userCoins.upsert({
+        where: {
+          user_id: userId,
+        },
+        update: {
+          coins: {
+            increment: coins,
+          },
+        },
+        create: {
+          user_id: userId,
+          coins,
+        },
+      });
+    } catch (error) {
+      console.error(error);
+      throw new Error('An error occurred while updating coins.');
+    }
+  };
+
   if (typeof weight === 'string' && typeof reps === 'string') {
     const weightNumber = parseFloat(weight);
     const repsNumber = parseFloat(reps);
@@ -102,10 +124,10 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
       // Look for an env variable called IS_LOCAL
       // if it's true, don't create a setEntry in the database, just return the id 1
       // otherwise, create a new setEntry in the database
-      if (process.env.IS_LOCAL) {
-        console.log('IS_LOCAL is true, not creating a setEntry');
-        return json({ setId: 23, coins });
-      }
+      // if (process.env.IS_LOCAL) {
+      //   console.log('IS_LOCAL is true, not creating a setEntry');
+      //   return json({ setId: 23, coins });
+      // }
 
       const setEntry = await db.setEntry.create({
         data: {
@@ -117,8 +139,14 @@ export const action = async ({ params, request }: LoaderFunctionArgs) => {
         },
       });
 
-      // Return the id of the new SetEntry
-      return json({ setId: setEntry.id, coins });
+      try {
+        await upsertUserCoins(userId, coins);
+        // Return the id of the new SetEntry
+        return json({ setId: setEntry.id, coins });
+      } catch (error) {
+        console.error(error);
+        return { error: 'An error occurred while updating coins.' };
+      }
     } catch (error) {
       console.error(error);
       return { error: 'An error occurred while updating.' };

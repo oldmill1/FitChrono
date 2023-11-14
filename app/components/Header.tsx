@@ -3,7 +3,7 @@ export default function Header({
   coins = 0,
 }: {
   title: string;
-  coins: number;
+  coins?: number;
 }) {
   return (
     <div className='header'>

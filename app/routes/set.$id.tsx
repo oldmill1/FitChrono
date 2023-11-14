@@ -5,7 +5,6 @@ import type { LoaderFunction } from '@remix-run/node';
 import { json } from '@remix-run/node';
 import invariant from 'tiny-invariant';
 import { db } from '~/db.server';
-import classNames from 'classnames';
 
 export const loader: LoaderFunction = async ({ params }) => {
   invariant(params.id, 'Missing id param');
