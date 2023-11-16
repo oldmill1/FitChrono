@@ -58,21 +58,14 @@ body {
 }
 
 .list-container {
-  //background-image: url('/images/list_bg.png');
   background-size: cover;
   background-image: linear-gradient(
-    226deg,
-    hsl(0deg 0% 100%) 0%,
-    hsl(56deg 100% 90%) 0%,
-    hsl(56deg 100% 76%) 1%,
-    hsl(57deg 84% 61%) 3%,
-    hsl(63deg 33% 59%) 6%,
-    hsl(209deg 22% 47%) 11%,
-    hsl(211deg 72% 31%) 19%,
-    hsl(212deg 64% 23%) 34%,
-    hsl(248deg 17% 9%) 98%
+    45deg,
+    hsl(270deg 100% 7%) 2%,
+    hsl(255deg 9% 34%) 87%,
+    hsl(151deg 3% 62%) 98%,
+    hsl(104deg 100% 95%) 100%
   );
-
   .list-box {
     list-style: none;
     margin: 0;
@@ -105,15 +98,12 @@ body {
     }
 
     .item-image {
-      width: 75px; // Set your desired image size
-      height: 75px;
+      width: 50px; // Set your desired image size
+      height: 65px;
       margin-right: 1rem;
-      border-radius: 50%; // Circular images
+      //border-radius: 50%; // Circular images
       object-fit: cover;
       display: inline-block;
-      box-shadow:
-        rgba(0, 0, 0, 0.19) 0px 10px 20px,
-        rgba(0, 0, 0, 0.23) 0px 6px 6px;
     }
 
     .item-text-content {
@@ -155,11 +145,33 @@ body {
     background: none;
     z-index: 999;
 
-    .title {
-      font-size: 2rem;
-      color: #333;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+    .left-group {
+      display: flex;
+      align-items: center;
+
+      .back-button {
+        margin-right: 10px; // Adjust spacing as needed
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        padding: 0.6rem 2rem;
+
+        // Icon styling (if using an icon)
+        img {
+          width: 24px; // Adjust size as needed
+          height: auto;
+        }
+      }
+
+      .title {
+        font-size: 2rem;
+        color: #333;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
     }
 
     .coins-meter {
@@ -285,4 +297,61 @@ body {
   overflow: hidden; // Ensures the border-radius is applied to children as well
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.aqua-button {
+  -webkit-appearance: none;
+  border: 1px solid #ccc;
+  border-radius: 125px;
+  box-shadow:
+    inset 0 13px 25px rgba(255, 255, 255, 0.5),
+    0 3px 5px rgba(0, 0, 0, 0.2),
+    0 10px 13px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  padding: 1.2rem 4rem;
+  position: relative;
+  transition: all ease 0.3s;
+  width: 100%;
+
+  &:active {
+    // Reduce the box shadow to give the impression it's being pressed
+    box-shadow:
+      inset 0 13px 25px rgba(255, 255, 255, 0.5),
+      0 2px 4px rgba(0, 0, 0, 0.1); // reduced y-offset and blur for a pressed look
+    // Move the button down to simulate a press
+    transform: translateY(4px) scale(0.98); // slight scale down for depth
+    // Adjust the pseudo-element to match the pressed state
+    &:before {
+      top: 3px; // slight move down to match the button's movement
+    }
+  }
+
+  &:before {
+    background: linear-gradient(
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    border-radius: 125px;
+    content: '';
+    height: 50px;
+    left: 4%;
+    position: absolute;
+    top: 1px;
+    transition: all ease 0.3s;
+    width: 92%;
+  }
+
+  &-confirm {
+    background: #4a90e2;
+    border-color: #3672b6;
+    color: #fff;
+  }
+
+  &-cancel {
+    background: #d0d0d0;
+    border-color: #b8b8b8;
+    color: #6f6f6f;
+  }
 }

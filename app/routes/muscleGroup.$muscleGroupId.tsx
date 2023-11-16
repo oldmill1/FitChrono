@@ -45,13 +45,13 @@ export default function MuscleGroup() {
   return (
     <div className='container list-container'>
       {muscleGroup.display && typeof muscleGroup.display === 'string' && (
-        <Header title={`${muscleGroup.display}`} />
+        <Header hasBackButton={true} title={`${muscleGroup.display}`} />
       )}
       <ul className='list-box'>
         {workouts.map((workout) => (
           <li key={workout.id} className='list-box-item'>
             <img
-              src='/images/icon_mini.png'
+              src='/images/icon.png'
               alt={workout.displayName}
               className='item-image'
             />
