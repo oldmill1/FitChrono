@@ -27,6 +27,7 @@ model Workout {
   id              Int               @id @default(autoincrement())
   name            String
   displayName     String
+  help            String?
   muscleGroupId   Int
   muscleGroup     MuscleGroup       @relation(fields: [muscleGroupId], references: [id])
   workoutDefaults WorkoutDefaults[]

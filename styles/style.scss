@@ -14,15 +14,128 @@ body {
   padding: 20px;
 
   .grid-item {
-    background: #f0f0f0; // Example background color
-    padding: 15px;
+    background-size: cover;
+    padding: 20px;
     text-align: center;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow for depth
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
 
+    text-decoration: none;
+    background: #acdec7;
+    border-radius: 40px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Helvetica Neue', Arial, sans-serif; // Apple-like font
+    color: #333; // Dark gray for text for readability
+    font-size: 1.3rem;
+    line-height: 1.9rem; // More readable line height
+    position: relative;
+
+    &:after {
+      content: '';
+      width: 80%;
+      height: 40px;
+      background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      position: absolute;
+      top: 0;
+      border-radius: 60px;
+
+      span {
+        z-index: 999;
+        position: relative;
+      }
+    }
+  }
+}
+
+.list-container {
+  //background-image: url('/images/list_bg.png');
+  background-size: cover;
+  background-image: linear-gradient(
+    226deg,
+    hsl(0deg 0% 100%) 0%,
+    hsl(56deg 100% 90%) 0%,
+    hsl(56deg 100% 76%) 1%,
+    hsl(57deg 84% 61%) 3%,
+    hsl(63deg 33% 59%) 6%,
+    hsl(209deg 22% 47%) 11%,
+    hsl(211deg 72% 31%) 19%,
+    hsl(212deg 64% 23%) 34%,
+    hsl(248deg 17% 9%) 98%
+  );
+
+  .list-box {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  .list-box-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ececec;
+    transition: background-color 0.3s;
+
+    &:last-child {
+      border-bottom: none;
+    }
 
     &:hover {
-      background-color: #e0e0e0; // Slightly darker on hover
+      background-color: #f7f7f7;
+    }
+
+    &:active {
+      background-color: #ececec;
+    }
+
+    .item-image {
+      width: 75px; // Set your desired image size
+      height: 75px;
+      margin-right: 1rem;
+      border-radius: 50%; // Circular images
+      object-fit: cover;
+      display: inline-block;
+      box-shadow:
+        rgba(0, 0, 0, 0.19) 0px 10px 20px,
+        rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+
+    .item-text-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .item-heading {
+        margin: 0;
+        font-size: 1.3rem;
+
+        a {
+          color: #333;
+          text-decoration: none;
+        }
+      }
+
+      .item-description {
+        margin: 0.25rem 0 0;
+        font-size: 1rem;
+        color: #666;
+      }
     }
   }
 }
@@ -43,7 +156,7 @@ body {
     z-index: 999;
 
     .title {
-      font-size: 24px;
+      font-size: 2rem;
       color: #333;
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -160,4 +273,16 @@ body {
       }
     }
   }
+}
+
+.list-box {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden; // Ensures the border-radius is applied to children as well
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
